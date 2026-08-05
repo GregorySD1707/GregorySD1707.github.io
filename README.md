@@ -1,43 +1,57 @@
-# Astro Starter Kit: Minimal
+# Gregory Salazar — Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
+Personal portfolio website, built with [Astro](https://astro.build) and deployed on GitHub Pages.
+
+> [!IMPORTANT]
+> **Try the portfolio now**
+> **Live:** https://gregorysd1707.github.io/
+
+## Stack
+
+- **Astro** — main framework, static output
+- **Astro Content Collections** — projects managed as Markdown in `src/content/projects/`
+- **astro-icon** + Material Design Icons (mdi) — iconography
+- **GitHub Actions** — CI/CD, automatic deploy to GitHub Pages on every push to `main`
+
+## Structure
+
+```
+src/
+├── assets/images/       # Images (WebP)
+├── components/          # Astro components (Header, Hero, Projects, ProjectCard...)
+├── content/projects/    # Projects as Markdown (title, stack, links, description)
+├── layouts/             # Base layout
+├── pages/               # Routes (index.astro)
+├── scripts/             # Client-side JS
+└── styles/              # CSS by section
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Local development
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+npm install
+npm run dev       # http://localhost:4321
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Build and preview
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```bash
+npm run build
+npm run preview
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Deploy
 
-## 🧞 Commands
+Automatic via GitHub Actions (`.github/workflows/deploy.yml`) on every push to `main`. No manual steps required.
 
-All commands are run from the root of the project, from a terminal:
+## Adding a new project
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+1. Add the image to `src/assets/images/projects/` (WebP format)
+2. Create a file in `src/content/projects/your-project.md` with the required frontmatter (title, description, stack, image, github, demo)
+3. Push to `main` — it deploys automatically
 
-## 👀 Want to learn more?
+## Contact
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Email: gregory.sd.17@gmail.com
+- LinkedIn: [linkedin.com/in/gsalazar17](https://www.linkedin.com/in/gsalazar17/)
+- GitHub: [@GregorySD1707](https://github.com/GregorySD1707)
