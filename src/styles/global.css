@@ -1,0 +1,78 @@
+/* ============================================================
+   global.css — Design Tokens
+   Capa 1: PRIMITIVAS
+   ============================================================ */
+:root {
+  --color-bg-900:        #0f1715;
+  --color-surface-800:   rgba(25, 35, 30, 0.7);
+  --color-accent-500:    #22c55e;
+  --color-accent-600:    #16a34a;
+  --color-text-50:       #f8fafc;
+  --color-text-400:      #94a3b8;
+  --color-black:         #000000;
+
+  --font-family-base: 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  --font-size-12: 0.75rem;
+  --font-size-14: 0.875rem;
+  --font-size-16: 1rem;
+  --font-size-18: 1.125rem;
+  --font-size-20: 1.25rem;
+  --font-size-24: 1.5rem;
+  --font-size-32: 2rem;
+  --font-size-40: 2.5rem;
+  --font-size-48: 3rem;
+  --font-size-56: 3.5rem;
+  --font-size-64: 4rem;
+  --font-size-72: 4.5rem;
+
+  --space-0:  0;
+  --space-4:  0.25rem;
+  --space-8:  0.5rem;
+  --space-12: 0.75rem;
+  --space-16: 1rem;
+  --space-20: 1.25rem;
+  --space-24: 1.5rem;
+  --space-32: 2rem;
+  --space-40: 2.5rem;
+  --space-48: 3rem;
+  --space-64: 4rem;
+  --space-96: 6rem;
+
+  --radius-8:    0.5rem;
+  --radius-16:   1rem;
+  --radius-24:   1.5rem;
+  --radius-full: 9999px;
+
+  --border-thin: 1px;
+  --border-thick: 2px;
+  --border-hero: 4px;
+
+  --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   Capa 2: SEMÁNTICAS
+   ============================================================ */
+:root {
+  --color-bg:           var(--color-bg-900);
+  --color-surface:      var(--color-surface-800);
+  --color-accent:       var(--color-accent-500);
+  --color-accent-hover: var(--color-accent-600);
+  --color-text-main:    var(--color-text-50);
+  --color-text-muted:   var(--color-text-400);
+  --color-text-inverse: var(--color-black);
+  
+  /* Sombra dinámica basada en el color de acento */
+  --shadow-accent-pulse: color-mix(in srgb, var(--color-accent) 25%, transparent);
+
+  --font-size-kicker:   var(--font-size-20); 
+  --font-size-headline: clamp(var(--font-size-40), 5vw, var(--font-size-72)); 
+  --font-size-role:     clamp(var(--font-size-24), 3vw, var(--font-size-40)); 
+  --font-size-body:     var(--font-size-18); 
+  --font-size-caption:  var(--font-size-14); 
+
+  --space-stack-tight: var(--space-8);   
+  --space-stack-loose: var(--space-24);  
+  --space-inline:      var(--space-16);  
+}

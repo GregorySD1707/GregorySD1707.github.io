@@ -1,0 +1,52 @@
+/* ============================================================
+   base.css — Base Styles
+   ============================================================ */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: var(--font-family-base);
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, var(--shadow-accent-pulse) 0%, transparent 60%);
+    z-index: -1;
+}
+
+/* global utility classes */
+.fade-in { 
+    opacity: 0; 
+    transform: translateY(20px); 
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
+}
+
+.fade-in.visible { 
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
+section[id] {
+    scroll-margin-top: 80px; /* Altura de tu header */
+}
+
+/* Convert icon sizing to relative units (em) */
+[class*="btn-"] svg, .link-inline svg {
+    width: 1.5em;  /* Scales with the font size instead of fixed 25px */
+    height: 1.5em; 
+    flex-shrink: 0;
+}

@@ -1,0 +1,39 @@
+---
+// src/components/ui/ActionElement.astro
+interface Props {
+  text: string;
+  href?: string;
+  variant: 'primary' | 'ghost' | 'inline';
+  iconPosition?: 'left' | 'right' | 'top' | 'bottom';
+  customClass?: string;
+}
+
+const { 
+  text, 
+  href, 
+  variant, 
+  iconPosition = 'left', 
+  customClass = '' 
+} = Astro.props;
+
+const Element = href ? 'a' : 'button';
+
+// Map variants to CSS classes
+const variantClasses = {
+  primary: 'btn-primary',
+  ghost: 'btn-ghost',
+  inline: 'link-inline'
+};
+
+const layoutClass = `icon-${iconPosition}`;
+const selectedClass = variantClasses[variant];
+---
+
+<Element 
+    href={href} 
+    class={`${selectedClass} ${layoutClass} ${customClass}`} 
+    {...(href ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+>
+    <slot name="icon" />
+    <span class="action-text">{text}</span>
+</Element>

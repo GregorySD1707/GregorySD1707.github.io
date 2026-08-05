@@ -1,0 +1,148 @@
+/* ============================================================
+   components.css — Component Styles
+   ============================================================ */
+/* ---------- Header & Nav ---------- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-32) 5%;
+    backdrop-filter: blur(10px);
+    border-bottom: var(--border-thin) solid rgba(255, 255, 255, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo { 
+    font-size: var(--font-size-20); 
+    font-weight: 700; 
+    color: var(--color-text-main); 
+    text-decoration: none; 
+    flex-shrink: 0; 
+}
+
+.logo span { color: var(--color-accent); }
+
+nav { display: flex; gap: var(--space-32); }
+
+nav a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: var(--font-size-16);
+    font-weight: 500;
+    transition: var(--transition-base);
+}
+
+nav a:hover { color: var(--color-accent); }
+
+.nav-toggle {
+   display: none;
+   background: transparent;
+   border: none;
+   color: var(--color-text-main);
+   cursor: pointer;
+   padding: var(--space-8);
+}
+
+.nav-toggle svg { width: 28px; height: 28px; }
+
+/* ---------- Buttons ---------- */
+
+/* Base Shared Layout Reset */
+[class*="btn-"], .link-inline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition-base);
+    font-size: var(--font-size-16);
+    font-weight: 600;
+}
+
+/* --- Icon Position Modifiers --- */
+.icon-left { flex-direction: row; gap: var(--space-8); }
+.icon-right { flex-direction: row-reverse; gap: var(--space-8); }
+.icon-top { flex-direction: column; gap: var(--space-8); text-align: center; }
+.icon-bottom { flex-direction: column-reverse; gap: var(--space-8); text-align: center; }
+
+
+/* --- 1. Primary Style (Solid) --- */
+.btn-primary {
+    background-color: var(--color-accent);
+    color: var(--color-text-inverse);
+    padding: var(--space-12) var(--space-24);
+    border-radius: var(--radius-full);
+    border: var(--border-thick) solid var(--color-accent);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--color-accent);
+    transform: translateY(-2px);
+}
+
+
+/* --- 2. Ghost Style (Outlined) --- */
+.btn-ghost {
+    background-color: transparent;
+    color: var(--color-text-main);
+    padding: var(--space-12) var(--space-24);
+    border-radius: var(--radius-full);
+    border: var(--border-thick) solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-ghost:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    transform: translateY(-2px);
+}
+
+
+/* --- 3. Inline / Stacked Style (Social / Links) --- */
+.link-inline {
+    background: transparent;
+    border: none;
+    color: var(--color-text-main);
+    font-weight: 500;
+    padding: 0;
+}
+
+.link-inline .action-text {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: rgba(255, 255, 255, 0.2);
+    transition: var(--transition-base);
+}
+
+.link-inline:hover {
+    color: var(--color-accent);
+}
+
+.link-inline:hover .action-text {
+    text-decoration-color: var(--color-accent);
+}
+
+/* Standardize SVG sizing across variations */
+[class*="btn-"] svg, .link-inline svg {
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+}
+
+/* ---------- Responsive Header ---------- */
+@media (max-width: 900px) {
+    header {
+        flex-direction: column; /* Apila el logo y la navegación */
+        gap: var(--space-16);
+        padding: var(--space-16) 5%;
+    }
+    
+    nav {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap; /* Permite que los enlaces bajen de línea si la pantalla es minúscula */
+        gap: var(--space-24);
+    }
+}

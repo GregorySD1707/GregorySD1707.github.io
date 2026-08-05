@@ -1,0 +1,56 @@
+---
+// src/components/Hero.astro
+import { Image } from 'astro:assets';
+import profileImage from '../assets/images/Foto_CV-sin_fondo.webp';
+import ActionElement from './ui/ActionElement.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<section id="home" class="hero">
+    <div class="hero-image fade-in">
+        <div class="profile-img-container">
+            <Image 
+            src={profileImage} 
+            alt="Gregory Salazar" 
+            class="profile-img"
+            />
+        </div>
+    </div>
+
+    <div class="hero-content fade-in" style="transition-delay: 0.1s;">
+        <div class="kicker-group">
+            <span class="kicker">Hi, I'm</span>
+            <h1 class="headline">Gregory Salazar</h1>
+        </div>
+
+        <div class="roles">
+            <span>Software Engineering Student</span>
+            <span>Full Stack Developer</span>
+        </div>
+
+        <p class="description">
+            4+ years developing collaborative projects. Specialized in full stack development,
+            databases, and computer vision AI. Located in Quito, Ecuador.
+        </p>
+
+        <div class="actions">
+            <ActionElement variant="primary" iconPosition="left" text="Download CV" href={`${import.meta.env.BASE_URL}documents/Gregory_Salazar-CV.pdf`}>
+                <Icon slot="icon" name="mdi:download" />
+            </ActionElement>
+            <div class="external-links">
+                <ActionElement variant="inline" iconPosition="top" text="GitHub" href="https://github.com/GregorySD1707">
+                    <Icon slot="icon" name="mdi:github" />
+                </ActionElement>
+
+                <ActionElement variant="inline" iconPosition="top" text="LinkedIn" href="https://www.linkedin.com/in/gsalazar17/">
+                    <Icon slot="icon" name="mdi:linkedin" />
+                </ActionElement>
+
+                <ActionElement variant="inline" iconPosition="top" text="Gmail" href="mailto:gregory.sd.17@gmail.com">
+                    <Icon slot="icon" name="mdi:email" />
+                </ActionElement>
+                
+            </div>
+        </div>
+    </div>
+</section>

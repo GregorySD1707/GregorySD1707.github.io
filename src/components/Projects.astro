@@ -1,0 +1,57 @@
+---
+// src/components/Projects.astro
+import { render } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+// Obtener todos los proyectos desde el contenido Markdown
+const allProjects = await getCollection('projects');
+
+---
+
+<section id="projects" class="fade-in">
+    <h2 class="section-title">Featured Projects</h2>
+    
+    <div class="carousel-wrapper">
+
+        <!-- Botón de navegación hacia atrás -->
+        <button class="carousel-btn prev-btn" aria-label="Previous project">
+            <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+
+        <div class="carousel-container">
+            <div id="carousel">
+                {allProjects.map(async (project, index) => {
+                    const colors = ['#22c55e', '#3b82f6', '#ef4444', '#8b5cf6', '#f59e0b', '#ec4899'];
+                    const colorIndex = index % colors.length;
+                    
+                    // Extraer el contenido del markdown
+                    const { Content } = await render(project);
+                    
+                    return (
+                        <ProjectCard 
+                            color={colors[colorIndex]}
+                            imageClass={`project-${project.id}`}
+                            image={project.data.image}
+                            title={project.data.title}
+                            description={project.data.description}
+                            technologies={project.data.stack}
+                            role={project.data.role}
+                            location={project.data.location}
+                            duration={project.data.duration}
+                            github={project.data.github}
+                            demo={project.data.demo}
+                        >
+                            {/* Pasamos el contenido como slot */}
+                            <Content />
+                        </ProjectCard>
+                    );
+                })}
+            </div>
+        </div>
+
+        <button class="carousel-btn next-btn" aria-label="Next project">
+            <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </button>
+    </div>
+</section>

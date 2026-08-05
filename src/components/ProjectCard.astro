@@ -1,0 +1,124 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import ActionElement from './ui/ActionElement.astro';
+import { Icon } from 'astro-icon/components';
+
+type Props = {
+  title: string;
+  description?: string;
+  technologies: string[];
+  color: string;
+  imageClass?: string;
+  image?: ImageMetadata;
+  github?: string;
+  demo?: string;
+  role?: string;
+  location?: string;
+  duration?: string;
+};
+
+const { 
+  title, 
+  description, 
+  technologies, 
+  color, 
+  imageClass, 
+  image, 
+  github, 
+  demo,
+  role = "Full Stack Developer", // Valores por defecto por si falta alguno
+  location = "Quito, Ecuador",
+  duration = "Project Duration"
+} = Astro.props;
+---
+
+<figure class="carousel-card" style={`--project-color: ${color}`}>
+    <div class="card-inner">
+        
+        <!-- ================= CARA FRONTAL ================= -->
+        <div class="card-face card-front">
+            <div class="project-image-container">
+                {image ? (
+                    <>
+                        <Image src={image} alt="" loading="lazy" class="project-img-bg" />
+                        <Image src={image} alt={title} loading="lazy" class="project-img" />
+                    </>
+                ) : (
+                    <div class={`project-image-placeholder ${imageClass || ''}`}>
+                        <span class="placeholder-icon">📁</span>
+                    </div>
+                )}
+            </div>
+            
+            <div class="project-info">
+                <!-- Título y Pitch Centrados -->
+                <div class="header-centered">
+                    <h3>{title}</h3>
+                    <p class="pitch">{description}</p>
+                </div>
+
+                <!-- Tags -->
+                <div class="tech-stack centered">
+                    {technologies.map((tech) => (
+                        <span class="tech-tag">{tech}</span>
+                    ))}
+                </div>
+
+                <!-- Metadatos -->
+                <div class="project-metadata">
+                    <div class="meta-item">
+                        <Icon class="meta-icon" name="mdi:account" />
+                        <span>{role}</span>
+                    </div>
+                    <div class="meta-item">
+                        <Icon class="meta-icon" name="mdi:map-marker" />
+                        <span>{location}</span>
+                    </div>
+                    <div class="meta-item">
+                        <Icon class="meta-icon" name="mdi:calendar" />
+                        <span>{duration}</span>
+                    </div>
+                </div>
+
+                <!-- Botones en una sola fila -->
+                <div class="project-links row-layout">
+                    <ActionElement variant="ghost" iconPosition="left" customClass="flip-btn" text="Achivements">
+                        <Icon slot="icon" name="mdi:achievement" />
+                    </ActionElement>
+                
+                    <div class="external-links">
+                        <ActionElement variant="inline" iconPosition="top" text="GitHub" href={github}>
+                            <Icon slot="icon" name="mdi:github" />
+                        </ActionElement>
+                    
+                        {demo && (
+                            <ActionElement variant="inline" iconPosition="top" customClass="demo-btn" text="Demo" href={demo}>
+                                <Icon slot="icon" name="mdi:play" />
+                            </ActionElement>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= CARA TRASERA ================= -->
+        <div class="card-face card-back">
+            <div class="back-header">
+                <h4>Achievements</h4>
+                <span class="back-title">{title}</span>
+            </div>
+            
+            <div class="markdown-content">
+                <slot /> <!-- bullet points del Markdown -->
+            </div>
+
+            <div class="back-footer">
+                <ActionElement variant="ghost" iconPosition="left" customClass="flip-back-btn" text="Back">
+                    <Icon slot="icon" name="mdi:arrow-left" />
+                </ActionElement>
+            </div>
+        </div>
+        
+    </div>
+</figure>
