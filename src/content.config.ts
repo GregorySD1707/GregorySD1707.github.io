@@ -7,7 +7,7 @@ const projects = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(),
     stack: z.array(z.string()),
-    github: z.url(),
+    github: z.url().optional(),
     demo: z.url().optional(),
     image: image().optional(), // Utilizamos el helper de imagen de Astro
     description: z.string().optional(),

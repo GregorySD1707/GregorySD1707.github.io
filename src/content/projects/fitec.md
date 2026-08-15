@@ -6,7 +6,7 @@ role: "Full Stack Developer"
 location: "Quito - Ecuador"
 duration: "April 2025 – August 2025"
 github: "https://github.com/GregorySD1707/FITEC-BDD"
-image: "../../assets/images/projects/fitec.webp"
+image: "../../assets/images/projects/fitec1.webp"
 ---
 
 - Designed distributed SQL Server database architecture across **2 geographic nodes**, applying horizontal fragmentation per branch with CHECK constraints, ensuring data isolation and privilege enforcement per location.

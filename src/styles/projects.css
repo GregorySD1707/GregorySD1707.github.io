@@ -73,7 +73,7 @@
 .carousel-card.active {
     /* Estado Activo (Foco Frontal) */
     opacity: 1;
-    filter: grayscale(0%) brightness(1.35);
+    filter: grayscale(0%) brightness(1);
     border: none;
     box-shadow: none;
 }

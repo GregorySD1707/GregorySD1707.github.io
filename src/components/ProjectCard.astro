@@ -88,9 +88,11 @@ const {
                     </ActionElement>
                 
                     <div class="external-links">
-                        <ActionElement variant="inline" iconPosition="top" text="GitHub" href={github}>
-                            <Icon slot="icon" name="mdi:github" />
-                        </ActionElement>
+                        {github && (
+                            <ActionElement variant="inline" iconPosition="top" text="GitHub" href={github}>
+                                <Icon slot="icon" name="mdi:github" />
+                            </ActionElement>
+                        )}
                     
                         {demo && (
                             <ActionElement variant="inline" iconPosition="top" customClass="demo-btn" text="Demo" href={demo}>
