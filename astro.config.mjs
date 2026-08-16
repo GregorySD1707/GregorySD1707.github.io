@@ -12,7 +12,7 @@ export default defineConfig({
   // Para usar iconos de Material Design Icons (MDI)
   integrations: [icon({
       include: {
-        'mdi': ['download', 'achievement', 'account', 'map-marker', 'calendar', 'arrow-left', 'play', 'github', 'linkedin', 'email'],
+        'mdi': ['download', 'achievement', 'account', 'map-marker', 'calendar', 'arrow-left', 'play', 'github', 'linkedin', 'email', 'folder'],
       },
     }),],
 });

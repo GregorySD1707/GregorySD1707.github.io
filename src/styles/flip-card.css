@@ -1,0 +1,71 @@
+/* ============================================================
+   flip-card.css — Mecánica genérica de flip 2D (reusable)
+   ============================================================ */
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.flip-card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius-16);
+    background-color: var(--color-surface);
+    box-sizing: border-box;
+    padding: var(--space-20);
+    border: var(--border-thin) solid rgba(255, 255, 255, 0.05);
+    transition: border-color 0.5s ease, box-shadow 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateZ(1px);
+}
+
+.card-front { position: relative; background: var(--color-surface); z-index: 1; }
+.card-back { transform: rotateY(180deg); background: var(--color-surface); z-index: 1; }
+
+/* ---------- Contenido de la cara trasera ---------- */
+.back-header {
+    margin-bottom: var(--space-16);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: var(--space-8);
+}
+.back-header h4 { color: var(--color-text-main); font-size: var(--font-size-20); }
+.back-title { font-size: var(--font-size-14); color: var(--color-text-muted); }
+
+.markdown-content {
+    flex: 1;
+    overflow-y: auto;
+    font-size: var(--font-size-14);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    padding-right: var(--space-8);
+    transform: translateZ(1px);
+    overscroll-behavior: contain;
+}
+.markdown-content ul { display: flex; flex-direction: column; gap: var(--space-12); padding-left: var(--space-16); }
+.markdown-content li { list-style-type: disc; }
+
+.back-footer { margin-top: var(--space-8); padding-top: var(--space-8); display: flex; justify-content: left; }
+.flip-back-btn { width: 30%; display: flex; align-items: center; justify-content: center; gap: var(--space-8); }
+.flip-back-btn svg { width: 18px; height: 18px; }
+
+.markdown-content::-webkit-scrollbar { width: 6px; }
+.markdown-content::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+.markdown-content::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--card-color, var(--color-accent)) 80%, transparent);
+    border-radius: 10px;
+}
+.markdown-content::-webkit-scrollbar-thumb:hover { background: var(--card-color, var(--color-accent)); }
+.markdown-content { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--card-color, var(--color-accent)) 80%, transparent) rgba(255,255,255,0.05); }

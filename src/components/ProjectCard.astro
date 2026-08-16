@@ -33,7 +33,7 @@ const {
 } = Astro.props;
 ---
 
-<figure class="carousel-card" style={`--project-color: ${color}`}>
+<figure class="carousel-card flip-card" style={`--card-color: ${color}`}>
     <div class="card-inner">
         
         <!-- ================= CARA FRONTAL ================= -->
@@ -46,7 +46,9 @@ const {
                     </>
                 ) : (
                     <div class={`project-image-placeholder ${imageClass || ''}`}>
-                        <span class="placeholder-icon">📁</span>
+                        <span class="placeholder-icon">
+                            <Icon name="mdi:folder" />
+                        </span>
                     </div>
                 )}
             </div>
@@ -82,7 +84,7 @@ const {
                 </div>
 
                 <!-- Botones en una sola fila -->
-                <div class="project-links row-layout">
+                <div class="card-actions row-layout">
                     <ActionElement variant="ghost" iconPosition="left" customClass="flip-btn" text="Achivements">
                         <Icon slot="icon" name="mdi:achievement" />
                     </ActionElement>

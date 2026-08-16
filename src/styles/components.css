@@ -62,10 +62,10 @@ nav a:hover { color: var(--color-accent); }
 }
 
 /* --- Icon Position Modifiers --- */
-.icon-left { flex-direction: row; gap: var(--space-8); }
-.icon-right { flex-direction: row-reverse; gap: var(--space-8); }
-.icon-top { flex-direction: column; gap: var(--space-8); text-align: center; }
-.icon-bottom { flex-direction: column-reverse; gap: var(--space-8); text-align: center; }
+.icon-left { flex-direction: row; gap: var(--space-0); }
+.icon-right { flex-direction: row-reverse; gap: var(--space-0); }
+.icon-top { flex-direction: column; gap: var(--space-0); text-align: center; }
+.icon-bottom { flex-direction: column-reverse; gap: var(--space-0); text-align: center; }
 
 
 /* --- 1. Primary Style (Solid) --- */

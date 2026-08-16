@@ -1,0 +1,33 @@
+---
+import { render, getCollection } from 'astro:content';
+import ExperienceCard from './ExperienceCard.astro';
+
+const allExperience = await getCollection('experience');
+---
+
+<section id="experience" class="fade-in">
+    <h2 class="section-title">Experience</h2>
+
+    <div class="experience-list">
+        {allExperience.map(async (experience, index) => {
+            const { Content } = await render(experience);
+            return (
+                <ExperienceCard
+                    company={experience.data.company}
+                    role={experience.data.role}
+                    duration={experience.data.duration}
+                    location={experience.data.location}
+                    title={experience.data.title}
+                    description={experience.data.description}
+                    stack={experience.data.stack}
+                    github={experience.data.github}
+                    demo={experience.data.demo}
+                    image={experience.data.image}
+                    animationDelay={index * 0.2} 
+                >
+                    <Content />
+                </ExperienceCard>
+            );
+        })}
+    </div>
+</section>

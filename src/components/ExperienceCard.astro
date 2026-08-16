@@ -1,0 +1,106 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import ActionElement from './ui/ActionElement.astro';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  company: string;
+  role: string;
+  duration: string;
+  location?: string;
+  title?: string;
+  description?: string;
+  stack?: string[];
+  github?: string;
+  demo?: string;
+  image?: ImageMetadata;
+  imagePosition?: 'left' | 'right' | 'top' | 'bottom';
+  animationDelay?: number;
+}
+
+const {
+  company, role, duration, location,
+  title, description, stack = [], github, demo, image,
+  imagePosition = 'left',
+  animationDelay = 0,
+} = Astro.props;
+
+const hasProject = Boolean(title || description || stack.length || github || demo);
+---
+
+<article class={`experience-card image-${imagePosition} fade-in`} style={`transition-delay: ${animationDelay}s`}>
+    <span class="timeline-dot"></span>
+
+    <div class="experience-content">
+        <div class="experience-image-container">
+            {image ? (
+                <>
+                    <Image src={image} alt="" loading="lazy" class="experience-img-bg" />
+                    <Image src={image} alt={company} loading="lazy" class="experience-img" />
+                </>
+            ) : (
+                <div class="experience-image-placeholder">
+                    <Icon name="mdi:briefcase" />
+                </div>
+            )}
+        </div>
+
+        <div class="experience-info">
+            <div class="experience-header">
+                <h3>{company}</h3>
+            </div>
+
+            <div class="experience-metadata">
+                <div class="meta-item">
+                    <Icon class="meta-icon" name="mdi:account" />
+                    <span>{role}</span>
+                </div>
+                <div class="meta-item">
+                    <Icon class="meta-icon" name="mdi:calendar" />
+                    <span>{duration}</span>
+                </div>
+                {location && (
+                    <div class="meta-item">
+                        <Icon class="meta-icon" name="mdi:map-marker" />
+                        <span>{location}</span>
+                    </div>
+                )}
+            </div>
+
+            {hasProject && (
+                <div class="experience-project">
+                    {title && <h4>{title}</h4>}
+                    {description && <p class="pitch">{description}</p>}
+                    {stack.length > 0 && (
+                        <div class="tech-stack">
+                            {stack.map((item) => <span class="tech-tag">{item}</span>)}
+                        </div>
+                    )}
+                </div>
+            )}
+            
+            <div class="achievements-list">
+                <slot /> <!-- bullets del Markdown, siempre visibles -->
+            </div>
+
+            {(github || demo) && (
+                 <div class="card-actions row-layout">
+                    <div class="external-links">
+                        {github && (
+                            <ActionElement variant="inline" iconPosition="top" text="GitHub" href={github}>
+                                <Icon slot="icon" name="mdi:github" />
+                            </ActionElement>
+                        )}
+                        {demo && (
+                            <ActionElement variant="inline" iconPosition="top" text="Demo" href={demo}>
+                                <Icon slot="icon" name="mdi:play" />
+                            </ActionElement>
+                        )}
+                    </div>
+                </div>
+            )}
+            
+        </div>
+    </div>
+</article>

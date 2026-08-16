@@ -1,0 +1,167 @@
+/* ============================================================
+   experience.css — Timeline vertical con efecto WOW (sin flip)
+   ============================================================ */
+#experience {
+    padding: var(--space-64) 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.experience-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-48);
+    width: 100%;
+    max-width: 950px;
+    padding-left: var(--space-32);
+}
+
+.experience-list::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--color-accent), transparent);
+}
+
+.experience-card { position: relative; width: 100%; }
+
+.timeline-dot {
+    position: absolute;
+    left: calc(-1 * var(--space-32));
+    top: var(--space-24);
+    width: 16px;
+    height: 16px;
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+    animation: pulse-ring 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.experience-content {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-0);
+    background: var(--color-surface);
+    border: var(--border-thin) solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-16);
+    padding: var(--space-0);
+    overflow: hidden;
+    transition: var(--transition-base);
+}
+
+.experience-card:has(.link-inline:hover) .experience-content {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 45px -10px color-mix(in srgb, var(--color-accent) 40%, transparent);
+    transform: translateY(-4px);
+}
+
+.experience-card.image-right .experience-content { flex-direction: row-reverse; }
+.experience-card.image-top .experience-content { flex-direction: column; }
+.experience-card.image-bottom .experience-content { flex-direction: column-reverse; }
+
+.experience-image-container {
+    flex: 1 1 50%;
+    min-width: 0;
+    min-height: 250px;
+    position: relative;
+    overflow: hidden;
+}
+
+.experience-card.image-top .experience-image-container,
+.experience-card.image-bottom .experience-image-container {
+    flex: 0 0 12rem;
+}
+
+.experience-img-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: blur(20px) brightness(0.7);
+    transform: scale(1.15);
+    z-index: 0;
+ }
+
+.experience-img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    transition: transform 0.5s ease;
+ }
+
+.experience-card:has(.link-inline:hover) .experience-img { transform: scale(1.05); }
+
+.experience-image-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-40);
+}
+
+.experience-info {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    justify-content: center;
+    padding: var(--space-20) var(--space-20) var(--space-20) var(--space-20);
+    
+}
+
+.experience-header h3 { font-size: var(--font-size-24); color: var(--color-text-main);}
+.experience-company { font-size: var(--font-size-16); color: var(--color-accent); font-weight: 600; }
+
+.experience-metadata {
+    display: flex;
+    gap: var(--space-8);
+    flex-wrap: wrap;
+    
+    align-items: center;
+    text-align: center;
+
+}
+
+.experience-project h4 { font-size: var(--font-size-18); margin-top: var(--space-8); color: var(--color-text-main); }
+
+.achievements-list {
+    font-size: var(--font-size-14);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+}
+.achievements-list ul { padding-left: var(--space-16); display: flex; flex-direction: column; gap: var(--space-4); }
+.achievements-list li { list-style-type: disc; }
+
+.experience-info .card-actions.row-layout {
+     justify-content: flex-end;
+ }
+
+@media (max-width: 700px) {
+    .experience-content { flex-direction: column !important; }
+    .experience-image-container { flex: 0 0 12rem !important; }
+    .experience-list { padding-left: var(--space-24); }
+    .timeline-dot { left: calc(-1 * var(--space-24)); }
+    .experience-image-container { flex: 0 0 12rem !important; min-width: 0 !important; }
+    .experience-info {
+        padding: var(--space-20) !important;
+        align-items: center;
+        text-align: center;
+    }
+    .experience-metadata { justify-content: center; }
+    .experience-info .card-actions.row-layout { justify-content: center; }
+}
