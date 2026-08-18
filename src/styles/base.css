@@ -1,6 +1,19 @@
 /* ============================================================
    base.css — Base Styles
    ============================================================ */
+
+/* Desplazamiento suave nativo en toda la página */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Accesibilidad para usuarios con sensibilidad al movimiento */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
 * { 
     margin: 0; 
     padding: 0; 
