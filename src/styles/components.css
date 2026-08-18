@@ -101,6 +101,18 @@ nav a.active::after {
 .icon-top { flex-direction: column; gap: var(--space-0); text-align: center; }
 .icon-bottom { flex-direction: column-reverse; gap: var(--space-0); text-align: center; }
 
+/* Definición de la animación de pulso ajustada a un botón */
+@keyframes pulse-btn {
+    0% {
+        box-shadow: 0 0 0 0 var(--shadow-accent-pulse);
+    }
+    70% {
+        box-shadow: 0 0 0 15px transparent; /* Ancho de halo sutil y elegante */
+    }
+    100% {
+        box-shadow: 0 0 0 0 transparent;
+    }
+}
 
 /* --- 1. Primary Style (Solid) --- */
 .btn-primary {
@@ -109,6 +121,8 @@ nav a.active::after {
     padding: var(--space-12) var(--space-24);
     border-radius: var(--radius-full);
     border: var(--border-thick) solid var(--color-accent);
+    /* Se añade la animación en bucle continuo */
+    animation: pulse-btn 3s infinite cubic-bezier(0.5, 0, 0.3, 1);
 }
 
 .btn-primary:hover {
