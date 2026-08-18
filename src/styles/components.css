@@ -158,19 +158,21 @@ nav a.active::after {
 }
 
 .link-inline .action-text {
-    text-decoration: underline;
+    /*text-decoration: underline;*/
+    /*text-decoration-color: rgba(255, 255, 255, 0.2);*/
     text-underline-offset: 4px;
-    text-decoration-color: rgba(255, 255, 255, 0.2);
     transition: var(--transition-base);
 }
 
 .link-inline:hover {
     color: var(--color-accent);
+    transform: translateY(-2px);
 }
 
+/*
 .link-inline:hover .action-text {
     text-decoration-color: var(--color-accent);
-}
+}*/
 
 /* Standardize SVG sizing across variations */
 [class*="btn-"] svg, .link-inline svg {

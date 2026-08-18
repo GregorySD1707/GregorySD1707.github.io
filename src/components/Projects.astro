@@ -1,7 +1,7 @@
 ---
 // src/components/Projects.astro
 import { render } from 'astro:content';
-import ProjectCard from './ProjectCard.astro';
+import ProjectCard from './ui/cards/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 
 // Obtener todos los proyectos desde el contenido Markdown
@@ -10,7 +10,7 @@ const allProjects = await getCollection('projects');
 ---
 
 <section id="projects" class="fade-in">
-    <h2 class="section-title">Featured Projects</h2>
+    <h2 class="section-title">Projects</h2>
     
     <div class="carousel-wrapper">
 
