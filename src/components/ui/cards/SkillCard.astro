@@ -1,0 +1,34 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  name: string;
+  icon: string;
+  projects: { title: string }[];
+  animationDelay?: number;
+}
+
+const { name, icon, projects, animationDelay = 0 } = Astro.props;
+const hasProjects = projects.length > 0;
+---
+
+{hasProjects ? (
+    <details class="skill-card fade-in" style={`transition-delay: ${animationDelay}s`}>
+        <summary class="skill-summary">
+            <div class="skill-inner">
+                <Icon class="skill-icon" name={icon} />
+                <span class="skill-name">{name}</span>
+            </div>
+        </summary>
+        <ul class="skill-projects">
+            {projects.map((p) => <li>{p.title}</li>)}
+        </ul>
+    </details>
+) : (
+    <div class="skill-card skill-card-static fade-in" style={`transition-delay: ${animationDelay}s`}>
+         <div class="skill-inner">
+            <Icon class="skill-icon" name={icon} />
+            <span class="skill-name">{name}</span>
+        </div>
+    </div>
+)}
