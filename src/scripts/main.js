@@ -131,42 +131,42 @@ document.addEventListener("DOMContentLoaded", () => {
     rotateCarousel();
   };
 
-  initCarousel();
-  initFlipCards(); // Inicializa la funcionalidad de volteo de tarjetas
-  initSkillsSpotlight();
-});
-
-// ----------------------------------------------------
-// Glow radial en la grid de Skills (sigue al cursor)
-// ----------------------------------------------------
-const initSkillsSpotlight = () => {
-    const grid = document.querySelector('.skills-grid');
+  // ----------------------------------------------------
+  // Glow radial en la grid de Skills (sigue al cursor)
+  // ----------------------------------------------------
+  const initSkillsSpotlight = () => {
+    const grid = document.querySelector(".skills-grid");
     if (!grid) return;
 
-    const cards = grid.querySelectorAll('.skill-card');
+    const cards = grid.querySelectorAll(".skill-card");
     const RADIUS = 75; // px — radio de influencia del glow
     let rafId = null;
 
     const updateGlow = (mouseX, mouseY) => {
-        cards.forEach((card) => {
-            const rect = card.getBoundingClientRect();
-            const dx = Math.max(rect.left - mouseX, 0, mouseX - rect.right);
-            const dy = Math.max(rect.top - mouseY, 0, mouseY - rect.bottom);
-            const distance = Math.hypot(dx, dy); // 0 si el mouse está dentro de la card
-            const intensity = Math.max(0, 1 - distance / RADIUS);
-            card.style.setProperty('--glow-intensity', intensity.toFixed(2));
-        });
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const dx = Math.max(rect.left - mouseX, 0, mouseX - rect.right);
+        const dy = Math.max(rect.top - mouseY, 0, mouseY - rect.bottom);
+        const distance = Math.hypot(dx, dy); // 0 si el mouse está dentro de la card
+        const intensity = Math.max(0, 1 - distance / RADIUS);
+        card.style.setProperty("--glow-intensity", intensity.toFixed(2));
+      });
     };
 
-    grid.addEventListener('mousemove', (e) => {
-        if (rafId) return;
-        rafId = requestAnimationFrame(() => {
-            updateGlow(e.clientX, e.clientY);
-            rafId = null;
-        });
+    grid.addEventListener("mousemove", (e) => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        updateGlow(e.clientX, e.clientY);
+        rafId = null;
+      });
     });
 
-    grid.addEventListener('mouseleave', () => {
-        cards.forEach((card) => card.style.setProperty('--glow-intensity', 0));
+    grid.addEventListener("mouseleave", () => {
+      cards.forEach((card) => card.style.setProperty("--glow-intensity", 0));
     });
-};
+  };
+
+  initCarousel();
+  initFlipCards(); // Inicializa la funcionalidad de volteo de tarjetas
+  initSkillsSpotlight();
+});

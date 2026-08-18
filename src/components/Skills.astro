@@ -1,27 +1,16 @@
 ---
-import { getCollection } from 'astro:content';
 import SkillCard from './ui/cards/SkillCard.astro';
 import { skills } from '../content/skills/skills.ts';
-
-const allProjects = await getCollection('projects');
-
-const skillsWithProjects = skills.map((skill) => ({
-    ...skill,
-    projects: allProjects
-        .filter((p) => p.data.stack.includes(skill.name))
-        .map((p) => ({ title: p.data.title })),
-}));
 ---
 
 <section id="skills" class="fade-in">
     <h2 class="section-title">Skills</h2>
 
     <div class="skills-grid">
-        {skillsWithProjects.map((skill, index) => (
+        {skills.map((skill, index) => (
             <SkillCard
                 name={skill.name}
                 icon={skill.icon}
-                projects={skill.projects}
                 animationDelay={index * 0.04}
             />
         ))}

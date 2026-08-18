@@ -1,6 +1,3 @@
-/* ============================================================
-   skills.css — Grid de skills con reveal escalonado
-   ============================================================ */
 #skills {
     padding: var(--space-64) 5%;
     display: flex;
@@ -28,7 +25,7 @@
     background: var(--color-surface);
     border: var(--border-thin) solid rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-16);
-    transition: var(--transition-base);
+    transition: transform 0.3s ease, var(--transition-base);
     background: color-mix(in srgb, var(--color-surface) 50%, transparent);
     --glow-intensity: 0;
     position: relative;
@@ -39,25 +36,12 @@
     flex-direction: column;
     align-items: center;
     gap: var(--space-8);
-    transition: transform 0.3s ease; /* sin delay heredado: nodo separado del fade-in */
 }
 
-.skill-card:hover .skill-inner,
-details.skill-card[open] .skill-inner {
-    transform: translateY(-6px) scale(1.06);
+.skill-card:hover {
+    transform: translateY(-6px) scale(1.04);
+    z-index: 2;
 }
-
-details.skill-card { cursor: pointer; }
-
-.skill-summary {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-8);
-    list-style: none;
-}
-
-.skill-summary::-webkit-details-marker { display: none; }
 
 .skill-icon {
     width: 2.5rem;
@@ -77,8 +61,7 @@ details.skill-card { cursor: pointer; }
     pointer-events: none;
 }
 
-.skill-card:hover,
-details.skill-card[open] {
+.skill-card:hover {
     z-index: 2;
 }
 
@@ -86,20 +69,6 @@ details.skill-card[open] {
     font-size: var(--font-size-14);
     text-align: center;
     color: var(--color-text-main);
-}
-
-.skill-projects {
-    margin-top: var(--space-12);
-    padding-top: var(--space-12);
-    border-top: var(--border-thin) solid rgba(255, 255, 255, 0.1);
-    font-size: var(--font-size-12);
-    color: var(--color-text-muted);
-    text-align: left;
-}
-
-.skill-projects li {
-    list-style-type: disc;
-    margin-left: var(--space-16);
 }
 
 @media (prefers-reduced-motion: reduce) {

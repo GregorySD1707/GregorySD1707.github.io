@@ -1,34 +1,26 @@
 ---
 import { Icon } from 'astro-icon/components';
+import type { ImageMetadata } from 'astro';
 
 interface Props {
   name: string;
-  icon: string;
-  projects: { title: string }[];
+  icon: string | ImageMetadata;
   animationDelay?: number;
 }
 
-const { name, icon, projects, animationDelay = 0 } = Astro.props;
-const hasProjects = projects.length > 0;
+const { name, icon, animationDelay = 0 } = Astro.props;
+
+// Verificamos si es una imagen webp local o un string de astro-icon
+const isLocalImage = typeof icon !== 'string';
 ---
 
-{hasProjects ? (
-    <details class="skill-card fade-in" style={`transition-delay: ${animationDelay}s`}>
-        <summary class="skill-summary">
-            <div class="skill-inner">
-                <Icon class="skill-icon" name={icon} />
-                <span class="skill-name">{name}</span>
-            </div>
-        </summary>
-        <ul class="skill-projects">
-            {projects.map((p) => <li>{p.title}</li>)}
-        </ul>
-    </details>
-) : (
-    <div class="skill-card skill-card-static fade-in" style={`transition-delay: ${animationDelay}s`}>
-         <div class="skill-inner">
-            <Icon class="skill-icon" name={icon} />
-            <span class="skill-name">{name}</span>
-        </div>
+<div class="skill-card fade-in" style={`--delay: ${animationDelay}s`}>
+    <div class="skill-inner">
+        {isLocalImage ? (
+            <img src={(icon as ImageMetadata).src} alt={name} class="skill-icon" />
+        ) : (
+            <Icon class="skill-icon" name={icon as string} />
+        )}
+        <span class="skill-name">{name}</span>
     </div>
-)}
+</div>
