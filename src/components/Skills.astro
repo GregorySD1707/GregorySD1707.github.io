@@ -6,13 +6,25 @@ import { skills } from '../content/skills/skills.ts';
 <section id="skills" class="fade-in">
     <h2 class="section-title">Skills</h2>
 
-    <div class="skills-grid">
-        {skills.map((skill, index) => (
-            <SkillCard
-                name={skill.name}
-                icon={skill.icon}
-                animationDelay={index * 0.04}
-            />
-        ))}
+    <div class="skills-wrapper collapsed" id="skills-wrapper">
+        <div class="skills-grid" id="skills-grid">
+            {skills.map((skill, index) => (
+                <SkillCard
+                    name={skill.name}
+                    icon={skill.icon}
+                    animationDelay={index * 0.04}
+                />
+            ))}
+        </div>
+        <!-- Capa de degradado al colapsar -->
+        <div class="skills-overlay" id="skills-overlay"></div>
     </div>
+
+    <!-- Botón interactivo -->
+    <button id="toggle-skills-btn" class="toggle-skills-btn" aria-expanded="false" style="display: none;">
+        <span class="btn-text">Show more</span>
+        <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+        </svg>
+    </button>
 </section>

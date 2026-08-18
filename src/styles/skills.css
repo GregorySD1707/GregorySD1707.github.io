@@ -12,6 +12,7 @@
     gap: var(--space-16);
     width: 100%;
     max-width: 1100px;
+    padding: 20px 0;
 }
 
 .skill-card {
@@ -73,4 +74,76 @@
 
 @media (prefers-reduced-motion: reduce) {
     .skill-card, .skill-icon { transition: none; }
+}
+
+/* ============================================================
+   Contenedor colapsable y degradado (Fade-out)
+   ============================================================ */
+.skills-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skills-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 90px;
+    background: linear-gradient(to bottom, transparent 0%, var(--color-bg) 90%);
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 5;
+}
+
+.skills-wrapper.expanded {
+    overflow: visible;
+}
+
+.skills-wrapper.expanded .skills-overlay {
+    opacity: 0;
+}
+
+/* ============================================================
+   Botón Interactivo WOW
+   ============================================================ */
+.toggle-skills-btn {
+    margin-top: var(--space-24);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-12) var(--space-24);
+    background: color-mix(in srgb, var(--color-surface) 80%, transparent);
+    color: var(--color-text-main);
+    border: var(--border-thin) solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+    border-radius: var(--radius-full);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-14);
+    font-weight: 600;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    position: relative;
+    z-index: 10;
+    transition: var(--transition-base);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-skills-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 25px var(--shadow-accent-pulse);
+}
+
+.toggle-skills-btn .chevron-icon {
+    width: 1.2em;
+    height: 1.2em;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-skills-btn[aria-expanded="true"] .chevron-icon {
+    transform: rotate(180deg);
 }

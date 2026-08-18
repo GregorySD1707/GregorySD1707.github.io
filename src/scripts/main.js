@@ -166,7 +166,83 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  // ----------------------------------------------------
+  // Despliegue dinámico de 4 filas de Skills
+  // ----------------------------------------------------
+  const initSkillsToggle = () => {
+    const wrapper = document.getElementById("skills-wrapper");
+    const grid = document.getElementById("skills-grid");
+    const btn = document.getElementById("toggle-skills-btn");
+    if (!wrapper || !grid || !btn) return;
+
+    let isExpanded = false;
+
+    const updateGridHeight = () => {
+      const cards = Array.from(grid.querySelectorAll(".skill-card"));
+      if (cards.length === 0) return;
+
+      // Obtener las coordenadas verticales de cada fila única
+      const rowTops = [];
+      cards.forEach((card) => {
+        const top = card.offsetTop;
+        if (!rowTops.includes(top)) rowTops.push(top);
+      });
+
+      // Si hay 4 o menos filas en total, se oculta el botón
+      if (rowTops.length <= 4) {
+        btn.style.display = "none";
+        wrapper.style.maxHeight = "none";
+        wrapper.classList.remove("collapsed");
+        wrapper.classList.add("expanded");
+        return;
+      }
+
+      btn.style.display = "inline-flex";
+
+      if (!isExpanded) {
+        // La altura de 4 filas equivale al inicio de la 5ª fila menos el inicio de la grid
+        const fifthRowTop = rowTops[4];
+        const gridTop = cards[0].offsetTop;
+        const peekAmount = 45; // Píxeles visibles de la parte superior de la 5ta fila
+        const collapsedHeight = fifthRowTop - gridTop + peekAmount;
+        wrapper.style.maxHeight = `${collapsedHeight}px`;
+      } else {
+        wrapper.style.maxHeight = `${grid.scrollHeight}px`;
+      }
+    };
+
+    btn.addEventListener("click", () => {
+      isExpanded = !isExpanded;
+      btn.setAttribute("aria-expanded", isExpanded);
+
+      const btnText = btn.querySelector(".btn-text");
+
+      if (isExpanded) {
+        wrapper.classList.remove("collapsed");
+        wrapper.classList.add("expanded");
+        wrapper.style.maxHeight = `${grid.scrollHeight}px`;
+        if (btnText) btnText.textContent = "Show less";
+      } else {
+        wrapper.classList.remove("expanded");
+        wrapper.classList.add("collapsed");
+        updateGridHeight();
+        if (btnText) btnText.textContent = "Show more";
+        wrapper.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    });
+
+    // Recalcular al cambiar el tamaño de ventana
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(updateGridHeight, 150);
+    });
+
+    updateGridHeight();
+  };
+
   initCarousel();
   initFlipCards(); // Inicializa la funcionalidad de volteo de tarjetas
   initSkillsSpotlight();
+  initSkillsToggle();
 });
