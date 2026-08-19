@@ -38,7 +38,12 @@
     backdrop-filter: blur(12px);
     z-index: 1; 
 }
-.card-back { transform: rotateY(180deg); background: var(--color-surface); z-index: 1; }
+.card-back { 
+    transform: rotateY(180deg);
+    background-color: rgba(15, 23, 21, 0.95);
+    backdrop-filter: blur(12px);
+    z-index: 1; 
+}
 
 /* ---------- Contenido de la cara trasera ---------- */
 .back-header {

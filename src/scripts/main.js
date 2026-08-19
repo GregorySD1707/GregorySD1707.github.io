@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // La altura de 4 filas equivale al inicio de la 5ª fila menos el inicio de la grid
         const fifthRowTop = rowTops[4];
         const gridTop = cards[0].offsetTop;
-        const peekAmount = 45; // Píxeles visibles de la parte superior de la 5ta fila
+        const peekAmount = 50; // Píxeles visibles de la parte superior de la 5ta fila
         const collapsedHeight = fifthRowTop - gridTop + peekAmount;
         wrapper.style.maxHeight = `${collapsedHeight}px`;
       } else {

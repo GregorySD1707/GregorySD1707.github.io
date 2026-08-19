@@ -51,6 +51,18 @@ const hasProject = Boolean(title || description || stack.length || github || dem
                 <h3>{company}</h3>
             </div>
 
+            {hasProject && (
+                <div class="experience-project">
+                    {title && <h4>{title}</h4>}
+                    {description && <p class="pitch">{description}</p>}
+                    {stack.length > 0 && (
+                        <div class="tech-stack">
+                            {stack.map((item) => <span class="tech-tag">{item}</span>)}
+                        </div>
+                    )}
+                </div>
+            )}
+
             <div class="experience-metadata">
                 <div class="meta-item">
                     <Icon class="meta-icon" name="mdi:account" />
@@ -67,18 +79,6 @@ const hasProject = Boolean(title || description || stack.length || github || dem
                     </div>
                 )}
             </div>
-
-            {hasProject && (
-                <div class="experience-project">
-                    {title && <h4>{title}</h4>}
-                    {description && <p class="pitch">{description}</p>}
-                    {stack.length > 0 && (
-                        <div class="tech-stack">
-                            {stack.map((item) => <span class="tech-tag">{item}</span>)}
-                        </div>
-                    )}
-                </div>
-            )}
             
             <div class="achievements-list">
                 <slot /> <!-- bullets del Markdown, siempre visibles -->
