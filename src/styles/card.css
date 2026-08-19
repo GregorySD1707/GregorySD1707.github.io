@@ -53,11 +53,13 @@
     justify-content: center;
 }
 
-.pitch {
+.project-info .pitch {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    font-size: var(--font-size-14);
-    color: var(--color-text-main);
+    font-size: var(--font-size-18);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--card-color);
 }
