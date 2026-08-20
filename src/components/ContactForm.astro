@@ -1,0 +1,111 @@
+---
+import "../styles/contact-form.css";
+
+interface Props {
+  formType?: "contact" | "suggestion" | "question";
+  title?: string;
+  customClass?: string;
+}
+
+const {
+  formType = "contact",
+  title = "Contact me",
+  customClass = "",
+} = Astro.props;
+
+const accessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
+const formId = `form-${formType}`;
+---
+
+<section id="contact">
+  <h2 class="section-title">Forms</h2>
+  <section class={`form-container ${customClass}`.trim()}>
+    {title && <h2 class="form-title">{title}</h2>}
+
+    <form
+      id={formId}
+      class="custom-form"
+      method="POST"
+      data-web3form
+      aria-busy="false"
+    >
+      <!-- Configuración del servicio -->
+      <input type="hidden" name="access_key" value={accessKey} />
+      <input
+        type="hidden"
+        name="subject"
+        value={`New message from ${formType} form`}
+      />
+      <input type="hidden" name="from_name" value="Web Portfolio" />
+
+      <!-- Honeypot anti-spam (Oculto visualmente y para lectores de pantalla) -->
+      <input
+        type="checkbox"
+        name="botcheck"
+        class="honeypot"
+        tabindex="-1"
+        autocomplete="off"
+      />
+
+      <div class="field-group">
+        <label for={`name-${formType}`}>Name</label>
+        <input
+          type="text"
+          id={`name-${formType}`}
+          name="name"
+          required
+          placeholder="Your name"
+          autocomplete="name"
+        />
+      </div>
+
+      <div class="field-group">
+        <label for={`email-${formType}`}>Email</label>
+        <input
+          type="email"
+          id={`email-${formType}`}
+          name="email"
+          required
+          placeholder="your@email.com"
+          autocomplete="email"
+        />
+      </div>
+
+      {
+        formType === "suggestion" && (
+          <div class="field-group">
+            <label for={`category-${formType}`}>Category</label>
+            <select id={`category-${formType}`} name="category">
+              <option value="ui">Interface / Design</option>
+              <option value="content">Content</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        )
+      }
+
+      <div class="field-group">
+        <label for={`message-${formType}`}>Message</label>
+        <textarea
+          id={`message-${formType}`}
+          name="message"
+          rows="5"
+          required
+          placeholder="Write your message here..."></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary" data-form-submit>Send</button>
+      <p class="form-status" data-form-status aria-live="polite"></p>
+    </form>
+  </section>
+</section>
+
+<script>
+  import { setupFormHandler } from "../scripts/formHandler";
+
+  // Inicializa todos los formularios marcados con data-web3form en la página
+  const forms = document.querySelectorAll<HTMLFormElement>(
+    "form[data-web3form]",
+  );
+  forms.forEach((form) => setupFormHandler(form));
+</script>

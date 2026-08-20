@@ -1,0 +1,85 @@
+/* ============================================================
+   contact-form.css — Form Styles & Design Tokens Integration
+   ============================================================ */
+#contact {
+    padding: var(--space-64) 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 600px;
+    margin: var(--space-0) auto var(--space-64) auto;
+    background-color: var(--color-surface);
+    border: var(--border-thin) solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-16);
+    padding: var(--space-32);
+}
+
+.form-title {
+    font-size: var(--font-size-24);
+    color: var(--color-text-main);
+    margin-bottom: var(--space-24);
+    text-align: center;
+}
+
+.custom-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+.field-group label {
+    font-size: var(--font-size-14);
+    color: var(--color-text-main);
+    font-weight: 500;
+}
+
+.field-group input,
+.field-group select,
+.field-group textarea {
+    width: 100%;
+    padding: var(--space-12) var(--space-16);
+    border-radius: var(--radius-8);
+    background-color: rgba(0, 0, 0, 0.2);
+    border: var(--border-thin) solid rgba(255, 255, 255, 0.1);
+    color: var(--color-text-main);
+    font-family: inherit;
+    font-size: var(--font-size-14);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field-group input:focus,
+.field-group select:focus,
+.field-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent);
+}
+
+/* Ocultamiento estricto para Honeypot anti-spam */
+.honeypot {
+    display: none !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+/* Retroalimentación al usuario */
+.form-status {
+    font-size: var(--font-size-14);
+    min-height: 1.5em;
+    text-align: center;
+    font-weight: 500;
+}
+
+.form-status.info { color: #3b82f6; }
+.form-status.success { color: #22c55e; }
+.form-status.error { color: #ef4444; }
