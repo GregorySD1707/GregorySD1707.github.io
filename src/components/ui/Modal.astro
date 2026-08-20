@@ -1,0 +1,17 @@
+---
+/* src/components/ui/Modal.astro */
+---
+<dialog id="global-modal" class="global-modal" aria-labelledby="modal-title" aria-describedby="modal-message">
+  <div class="modal-content">
+    <div id="modal-icon" class="modal-icon" aria-hidden="true"></div>
+    <h3 id="modal-title"></h3>
+    <p id="modal-message"></p>
+    <!-- texto inicial que existe en el DOM antes de que JavaScript interactúe con el elemento -->
+    <button type="button" id="modal-close-btn" class="btn-primary">Accept</button>
+  </div>
+</dialog>
+
+<script>
+  import { initModal } from '../../scripts/modal';
+  initModal();
+</script>

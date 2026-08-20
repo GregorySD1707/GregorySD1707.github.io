@@ -2,6 +2,8 @@
 // src/layouts/Layout.astro
 import Header from '../components/Header.astro';
 
+import Modal from '../components/ui/Modal.astro';
+
 import '../styles/global.css';
 import '../styles/base.css';
 import '../styles/components.css';
@@ -37,6 +39,8 @@ const { title = "Gregory Salazar | Portfolio" } = Astro.props;
     <main>
         <slot />
     </main>
+
+    <Modal />
 
     <!-- JavaScript Global -->
     <script src="../scripts/main.js"></script>

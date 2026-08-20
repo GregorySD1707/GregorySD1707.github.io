@@ -1,4 +1,6 @@
 // src/scripts/formhandler.ts
+import { showModal } from './modal';
+
 export interface Web3FormsResponse {
     success: boolean;
     message?: string;
@@ -261,9 +263,23 @@ export function setupFormHandler(form: HTMLFormElement): void {
                 });
 
                 inputs.forEach((input) => input.removeAttribute('aria-invalid'));
+
+                // En el envío exitoso del formulario:
+                showModal({
+                    title: 'Message sent successfully!',
+                    message: 'Thanks for contacting me. I will respond to you as soon as possible.',
+                    type: 'success'
+                });
             } else {
                 statusText.textContent = result.message || 'An error occurred while sending.';
                 statusText.className = 'form-status error';
+
+                // En el envío exitoso del formulario:
+                showModal({
+                    title: 'Something went wrong!',
+                    message: 'Sorry, there was an error sending your message. Please try again later.',
+                    type: 'error'
+                });
             }
         } catch (error) {
             statusText.textContent = 'Connection error. Please try again.';
