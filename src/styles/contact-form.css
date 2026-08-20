@@ -1,40 +1,36 @@
 /* ============================================================
-   contact-form.css — Form Styles & Design Tokens Integration
+   contact-form.css — Section Layout & Form Styles
    ============================================================ */
+
+/* Estandarización de sección global (igual que #experience) */
 #contact {
     padding: var(--space-64) 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
 .form-container {
     width: 100%;
-    max-width: 600px;
-    margin: var(--space-0) auto var(--space-64) auto;
+    max-width: 650px;
+    margin: 0 auto;
     background-color: var(--color-surface);
     border: var(--border-thin) solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-16);
     padding: var(--space-32);
 }
 
-.form-title {
-    font-size: var(--font-size-24);
-    color: var(--color-text-main);
-    margin-bottom: var(--space-24);
-    text-align: center;
-}
-
 .custom-form {
     display: flex;
     flex-direction: column;
-    gap: var(--space-16);
+    gap: var(--space-12);
 }
 
 .field-group {
     display: flex;
     flex-direction: column;
-    gap: var(--space-8);
+    gap: var(--space-4);
 }
 
 .field-group label {
@@ -43,8 +39,13 @@
     font-weight: 500;
 }
 
+.field-group label.required::after {
+    content: " *";
+    color: var(--color-error);
+    font-weight: bold;
+}
+
 .field-group input,
-.field-group select,
 .field-group textarea {
     width: 100%;
     padding: var(--space-12) var(--space-16);
@@ -57,22 +58,157 @@
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.field-group textarea {
+    min-height: 11.25rem; /* ~180px en unidades relativas */
+    resize: vertical;
+    line-height: 1.5;
+}
+
 .field-group input:focus,
-.field-group select:focus,
 .field-group textarea:focus {
     outline: none;
     border-color: var(--color-accent);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent);
 }
 
-/* Ocultamiento estricto para Honeypot anti-spam */
+/* ============================================================
+   Reason Group (Radio Buttons)
+   ============================================================ */
+
+.reason-group {
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.reason-group legend {
+    font-size: var(--font-size-14);
+    color: var(--color-text-main);
+    font-weight: 500;
+}
+
+.reason-group legend.required::after {
+    content: " *";
+    color: var(--color-error);
+    font-weight: bold;
+}
+
+.radio-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-12);
+    margin-top: var(--space-4);
+}
+
+.radio-label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-12) var(--space-16);
+    border-radius: var(--radius-8);
+    background-color: rgba(0, 0, 0, 0.2);
+    border: var(--border-thin) solid rgba(255, 255, 255, 0.1);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-14);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-base);
+    flex: 1 1 10rem; /* Permite adaptación flexible en móviles o zoom alto */
+    text-align: center;
+}
+
+.radio-label input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+.radio-label:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: var(--color-text-main);
+}
+
+.radio-label:has(input:checked) {
+    border-color: var(--color-accent);
+    background-color: color-mix(in srgb, var(--color-accent) 15%, transparent);
+    color: var(--color-text-main);
+}
+
+.radio-label:has(input:focus-visible) {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent);
+}
+
+/* ============================================================
+   Textarea Wrapper & Footer Row (Error + Counter)
+   ============================================================ */
+
+.textarea-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+/* Fila contenedora para alinear el error y el contador */
+.textarea-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-8);
+    width: 100%;
+    flex-wrap: wrap; /* En zoom 500% se apilan verticalmente si no hay espacio */
+}
+
+.textarea-footer .field-error {
+    flex: 1 1 12rem;
+    margin: 0;
+}
+
+.textarea-footer .char-counter {
+    flex: 0 0 auto;
+    margin-left: auto;
+    font-size: var(--font-size-12);
+    color: var(--color-text-muted);
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+
+.char-counter.limit-near { color: var(--color-warning); }
+.char-counter.limit-reached { color: var(--color-error); }
+
+/* ============================================================
+   Validations, Status & Accessibility States
+   ============================================================ */
+
+.field-group input[aria-invalid="true"],
+.field-group textarea[aria-invalid="true"] {
+    border-color: var(--color-error) !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
+}
+
+.field-error {
+    font-size: var(--font-size-12);
+    color: var(--color-error);
+    min-height: 1.25em;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
 .honeypot {
     display: none !important;
     position: absolute !important;
     left: -9999px !important;
 }
 
-/* Retroalimentación al usuario */
 .form-status {
     font-size: var(--font-size-14);
     min-height: 1.5em;
@@ -80,6 +216,36 @@
     font-weight: 500;
 }
 
-.form-status.info { color: #3b82f6; }
-.form-status.success { color: #22c55e; }
-.form-status.error { color: #ef4444; }
+.form-status.info { color: var(--color-info); }
+.form-status.success { color: var(--color-success); }
+.form-status.error { color: var(--color-error); }
+
+/* ============================================================
+   Responsive & Zoom 500% (WCAG Reflow)
+   ============================================================ */
+
+@media (max-width: 700px) {
+    #contact {
+        padding: var(--space-48) 4%;
+    }
+
+    .form-container {
+        padding: var(--space-20);
+    }
+
+    .radio-label {
+        flex: 1 1 100%; /* Píldoras ocupan el ancho completo en pantallas pequeñas */
+    }
+}
+
+/* Sobrescribe el estilo nativo de autocompletado (Autofill) */
+.field-group input:-webkit-autofill,
+.field-group input:-webkit-autofill:hover, 
+.field-group input:-webkit-autofill:focus,
+.field-group textarea:-webkit-autofill,
+.field-group textarea:-webkit-autofill:hover,
+.field-group textarea:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--color-text-main);
+    -webkit-box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent); /* Reemplaza #121212 por el color exacto del fondo de tus inputs */
+    transition: background-color 5000s ease-in-out 0s;
+}

@@ -1,44 +1,30 @@
 ---
-import "../styles/contact-form.css";
-
-interface Props {
-  formType?: "contact" | "suggestion" | "question";
-  title?: string;
-  customClass?: string;
-}
-
-const {
-  formType = "contact",
-  title = "Contact me",
-  customClass = "",
-} = Astro.props;
+import { contactReasons } from "../content/contact/reasons";
 
 const accessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
-const formId = `form-${formType}`;
 ---
 
-<section id="contact">
-  <h2 class="section-title">Forms</h2>
-  <section class={`form-container ${customClass}`.trim()}>
-    {title && <h2 class="form-title">{title}</h2>}
+<section id="contact" class="fade-in">
+  <div class="form-container">
+    <h2 class="section-title">Contact Me</h2>
 
     <form
-      id={formId}
+      id="contact-form"
       class="custom-form"
       method="POST"
       data-web3form
       aria-busy="false"
+      novalidate
     >
-      <!-- Configuración del servicio -->
       <input type="hidden" name="access_key" value={accessKey} />
       <input
         type="hidden"
         name="subject"
-        value={`New message from ${formType} form`}
+        id="form-subject"
+        value="New message from Web Portfolio"
       />
       <input type="hidden" name="from_name" value="Web Portfolio" />
 
-      <!-- Honeypot anti-spam (Oculto visualmente y para lectores de pantalla) -->
       <input
         type="checkbox"
         name="botcheck"
@@ -47,63 +33,112 @@ const formId = `form-${formType}`;
         autocomplete="off"
       />
 
+      <fieldset class="reason-group">
+        <legend class="required">Reason</legend>
+        <div class="radio-wrapper">
+          {
+            contactReasons.map((reason, index) => (
+              <label class="radio-label">
+                <input
+                  type="radio"
+                  name="reason"
+                  value={reason.id}
+                  required
+                  checked={index === 0}
+                  data-reason-config={JSON.stringify(reason)}
+                />
+                {reason.label}
+              </label>
+            ))
+          }
+        </div>
+      </fieldset>
+
       <div class="field-group">
-        <label for={`name-${formType}`}>Name</label>
+        <label for="name" class="required">Name</label>
         <input
           type="text"
-          id={`name-${formType}`}
+          id="name"
           name="name"
           required
           placeholder="Your name"
           autocomplete="name"
+          aria-describedby="error-name"
         />
+        <span class="field-error" id="error-name" aria-live="polite"></span>
       </div>
 
       <div class="field-group">
-        <label for={`email-${formType}`}>Email</label>
+        <label for="email" class="required">Email</label>
         <input
           type="email"
-          id={`email-${formType}`}
+          id="email"
           name="email"
           required
-          placeholder="your@email.com"
+          placeholder="your.email@domain.com"
           autocomplete="email"
+          aria-describedby="error-email"
         />
+        <span class="field-error" id="error-email" aria-live="polite"></span>
       </div>
 
-      {
-        formType === "suggestion" && (
-          <div class="field-group">
-            <label for={`category-${formType}`}>Category</label>
-            <select id={`category-${formType}`} name="category">
-              <option value="ui">Interface / Design</option>
-              <option value="content">Content</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-        )
-      }
+      <!-- Campo Extra: Company (Solo para laboral) -->
+      <div
+        class="field-group extra-field"
+        data-extra-for="company"
+        style="display: none;"
+      >
+        <label for="company_name" class="required">Company</label>
+        <input
+          type="text"
+          id="company_name"
+          name="company_name"
+          placeholder="Name of your company or organization"
+          aria-describedby="error-company_name"
+        />
+        <span class="field-error" id="error-company_name" aria-live="polite"
+        ></span>
+      </div>
 
-      <div class="field-group">
-        <label for={`message-${formType}`}>Message</label>
+      <div class="field-group textarea-wrapper">
+        <label for="message" class="required">Message</label>
         <textarea
-          id={`message-${formType}`}
+          id="message"
           name="message"
-          rows="5"
+          maxlength="500"
           required
-          placeholder="Write your message here..."></textarea>
+          aria-describedby="error-message char-counter"
+          class="custom-scrollbar"
+          ></textarea>
+
+        <!-- Contenedor flex para alinear error a la izquierda y contador a la derecha -->
+        <div class="textarea-footer">
+          <span class="field-error" id="error-message" aria-live="polite"
+          ></span>
+          <span class="char-counter" id="char-counter" data-counter-for="message">0 / 500</span>
+        </div>
       </div>
 
-      <button type="submit" class="btn-primary" data-form-submit>Send</button>
       <p class="form-status" data-form-status aria-live="polite"></p>
+      <button type="submit" class="btn-primary" data-form-submit
+        >Send Message</button
+      >
     </form>
-  </section>
+  </div>
+
+  <!-- Modal de Éxito -->
+  <dialog id="success-modal" class="success-modal">
+    <div class="modal-content">
+      <div class="modal-icon">✓</div>
+      <h3>¡Mensaje Enviado!</h3>
+      <p>Gracias por contactarme. Te responderé a la brevedad posible.</p>
+      <button type="button" id="close-modal-btn" class="btn-primary">Aceptar</button>
+    </div>
+  </dialog>
 </section>
 
 <script>
   import { setupFormHandler } from "../scripts/formHandler";
-
-  // Inicializa todos los formularios marcados con data-web3form en la página
   const forms = document.querySelectorAll<HTMLFormElement>(
     "form[data-web3form]",
   );

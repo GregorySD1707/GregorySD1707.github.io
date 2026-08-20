@@ -174,13 +174,6 @@ nav a.active::after {
     text-decoration-color: var(--color-accent);
 }*/
 
-/* Standardize SVG sizing across variations */
-[class*="btn-"] svg, .link-inline svg {
-    width: 25px;
-    height: 25px;
-    flex-shrink: 0;
-}
-
 /* ---------- Responsive Header ---------- */
 @media (max-width: 900px) {
     header {

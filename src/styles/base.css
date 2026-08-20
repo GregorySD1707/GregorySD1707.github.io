@@ -63,3 +63,30 @@ section[id] {
     height: 1.5em; 
     flex-shrink: 0;
 }
+
+/* ============================================================
+   Custom Scrollbar Utility
+   ============================================================ */
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--card-color, var(--color-accent)) 80%, transparent) rgba(255, 255, 255, 0.05);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--card-color, var(--color-accent)) 80%, transparent);
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--card-color, var(--color-accent));
+}

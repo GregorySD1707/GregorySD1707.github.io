@@ -70,12 +70,3 @@
 .back-footer { margin-top: var(--space-8); padding-top: var(--space-8); display: flex; justify-content: left; }
 .flip-back-btn { width: 30%; display: flex; align-items: center; justify-content: center; gap: var(--space-8); }
 .flip-back-btn svg { width: 18px; height: 18px; }
-
-.markdown-content::-webkit-scrollbar { width: 6px; }
-.markdown-content::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
-.markdown-content::-webkit-scrollbar-thumb {
-    background: color-mix(in srgb, var(--card-color, var(--color-accent)) 80%, transparent);
-    border-radius: 10px;
-}
-.markdown-content::-webkit-scrollbar-thumb:hover { background: var(--card-color, var(--color-accent)); }
-.markdown-content { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--card-color, var(--color-accent)) 80%, transparent) rgba(255,255,255,0.05); }

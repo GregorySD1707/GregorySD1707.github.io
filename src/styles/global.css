@@ -10,6 +10,9 @@
   --color-text-50:       #f8fafc;
   --color-text-400:      #94a3b8;
   --color-black:         #000000;
+  --color-red:           #ef4444;
+  --color-yellow:        #f59e0b;
+  --color-blue:          #3b82f6;
 
   --font-family-base: 'Segoe UI', system-ui, -apple-system, sans-serif;
 
@@ -63,6 +66,10 @@
   --color-text-main:    var(--color-text-50);
   --color-text-muted:   var(--color-text-400);
   --color-text-inverse: var(--color-black);
+  --color-error:        var(--color-red);
+  --color-warning:      var(--color-yellow);
+  --color-info:         var(--color-blue);
+  --color-success:      var(--color-accent-500);
   
   /* Sombra dinámica basada en el color de acento */
   --shadow-accent-pulse: color-mix(in srgb, var(--color-accent) 25%, transparent);
