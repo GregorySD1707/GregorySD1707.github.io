@@ -1,7 +1,7 @@
 ---
 title: "KNOCKOUT GAME"
 description: "2D Fighting Game"
-stack: ["Unity Engine", "C#", "Level Design"]
+stack: ["Unity Engine", "C#", "Level Design", "itch.io", "Game Development"]
 role: "Game Developer"
 location: "Quito - Ecuador"
 duration: "October 2024 – March 2025"

@@ -1,8 +1,8 @@
 ---
 title: "Elderly Care"
 description: "Telemedicine Prototype for Older Adults"
-stack: ["Figma", "UX Design", "UI Design", "Usability Testing", "User Research"]
-role: "UX-UI Figma Designer & Usability Evaluator"
+stack: ["Figma", "UX Design", "UI Design", "Usability Testing", "User Research", "Prototyping", "Agile Methodology"]
+role: "UX-UI Figma Designer"
 location: "Quito - Ecuador"
 duration: "May 2026 – July 2026"
 demo: "https://www.figma.com/proto/pYPoQyhypgpKw3FDlSEQX0/Prototipado?node-id=529-3482&t=khsnxUxsWfVxbmTc-1&scaling=min-zoom&content-scaling=fixed&page-id=37%3A59&starting-point-node-id=529%3A3482&show-proto-sidebar=1"

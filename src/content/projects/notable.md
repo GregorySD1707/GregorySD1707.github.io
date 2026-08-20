@@ -1,7 +1,7 @@
 ---
 title: "Notable"
 description: "Collaborative Digital Library"
-stack: ["Python", "Django", "SQLite", "ORM", "Database Design"]
+stack: ["Python", "Django", "SQLite", "ORM", "Database Design",  "Behavior-Driven Development", "Gherkin", "Behave"]
 role: "Full Stack Developer"
 location: "Quito - Ecuador"
 duration: "May 2026 – July 2026"

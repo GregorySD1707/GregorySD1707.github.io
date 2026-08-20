@@ -2,13 +2,15 @@
    projects.css — 3D Carousel & Project Cards
    ============================================================ */
 
+/* ---------- MODIFICAR: Contenedor Principal ---------- */
 #projects {
-    padding: var(--space-64) 5%;
+    padding: var(--space-64) 2%; /* Reducido de 5% a 2% para ganar ancho útil */
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-x: hidden; /* oculta todo el contenido horizontal que sobresalga del contenedor */
-    overflow-y: visible; /* Permite scroll vertical normal */
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: clip; /* 'clip' evita el scrollbar horizontal sin romper posicionamiento sticky/fixed */
 }
 
 .section-title {
@@ -28,12 +30,13 @@
     flex-wrap: wrap; /* Permite que los botones laterales se muevan debajo del carrusel en pantallas pequeñas */
 }
 
-/* ---------- Escenario 3D ---------- */
+/* ---------- MODIFICAR: Escenario 3D ---------- */
 .carousel-container {
     perspective: 1100px;
-    width: min(500px, 90vw);
-    aspect-ratio: 500 / 480;
-    height: auto;
+    width: 100%;
+    max-width: 480px;
+    min-height: 520px; /* Otorga espacio suficiente para que NINGUNA card se corte */
+    margin: 0 0;
     position: relative;
 }
 
@@ -41,33 +44,26 @@
     width: 100%;
     height: 100%;
     position: absolute;
+    top: 0;
+    left: 0;
     transform-style: preserve-3d;
-    /* Curva cubic-bezier para un frenado elástico y natural */
     transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); 
 }
 
 /* ---------- Tarjetas de Proyectos ---------- */
 .carousel-card {
-    position: absolute;
+    position: absolute; /* Reemplaza 'grid-area: card' */
     width: 100%;
     height: 100%;
-    min-height: 18rem;
     left: 0;
     top: 0;
     border-radius: var(--radius-16);
-    background-color: var(--color-surface);
-    border: var(--border-thin) solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 0 0 0 transparent;
-    transition: opacity 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease, border-color 0.5s ease;
-    
-    /* Estado Inactivo (Fondo) */
+    background-color: transparent;
+    border: none;
     opacity: 0.3;
     filter: grayscale(100%);
-
-    /* Añadimos perspectiva local para el giro */
     perspective: 1500px;
-    background-color: transparent; /* El fondo real ahora lo tienen las caras */
-    border: none;
+    transition: opacity 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease, border-color 0.5s ease;
 }
 
 .carousel-card.active {
@@ -135,7 +131,8 @@
     flex-direction:row;
     align-items: center;
     justify-content: center;
-    gap: var(--space-24);
+    row-gap: var(--space-4);     /* Espacio vertical cuando se apilan (4px muy compacto) */
+    column-gap: var(--space-16); /* Espacio horizontal mientras están en la misma línea */
      /*margin-bottom: auto; /* Empuja los botones abajo */
     padding: var(--space-4) 0;
     /*border-top: 1px solid rgba(255, 255, 255, 0.05);*/
@@ -159,7 +156,7 @@
 .project-image-container {
     width: 100%;
     flex: 1 1 12rem; /* prefiere 12rem, pero puede crecer o encogerse */
-    min-height: 0;   /* clave: permite encogerse por debajo de su tamaño natural, hasta 0 */
+    min-height: 140px;   /* clave: permite encogerse por debajo de su tamaño natural, hasta 0 */
     max-height: 12rem; /* nunca crece más de lo previsto */
     position: relative;
     border-radius: var(--radius-8);
@@ -308,57 +305,89 @@
 }
 
 /* Remove the strict aspect ratio on small screens */
+/* ---------- MODIFICAR: Media Query Tablet / Móvil ---------- */
 @media (max-width: 900px) {
-    /* Usamos Grid para organizar el carrusel y los botones perfectamente */
     .carousel-wrapper {
         display: grid;
-        grid-template-columns: 1fr 1fr; /* Dos columnas iguales para los botones */
-        grid-template-rows: auto auto;  /* Dos filas: Tarjeta arriba, botones abajo */
-        gap: var(--space-24);
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: var(--space-20);
         justify-items: center;
         width: 100%;
-        padding-bottom: 0;
+        padding-bottom: var(--space-16);
     }
 
     .carousel-container {
-        grid-column: 1 / -1; /* Ocupa todo el ancho disponible */
-        grid-row: 1; /* Se posiciona en la primera fila */
+        grid-column: 1 / -1;
+        grid-row: 1;
         width: 100%;
-        
-        /* Eliminamos la proporción estricta y usamos un alto mínimo seguro para texto largo */
-        aspect-ratio: auto;
-        height: auto;
-        min-height: 28rem;
-        max-height: none;
+        max-width: 480px;
+        min-height: 500px; /* Espacio vertical seguro para que el texto no pise la fila 2 */
+        margin: 0 auto;
     }
 
-    /* Colocamos los botones de navegación en la segunda fila del grid */
+    .project-image-container {
+        min-height: 140px;
+        max-height: 150px;
+    }
+
+    /* Ubicación explícita de los botones en la fila 2 */
     .prev-btn {
         grid-column: 1;
         grid-row: 2;
-        position: relative; /* Quitamos posicionamiento absoluto previo */
+        justify-self: end; /* Los acerca al centro */
+        margin-right: var(--space-12);
     }
     
     .next-btn {
         grid-column: 2;
         grid-row: 2;
-        position: relative; /* Quitamos posicionamiento absoluto previo */
+        justify-self: start; /* Los acerca al centro */
+        margin-left: var(--space-12);
     }
 
     .carousel-btn {
-        width: 44px; 
-        height: 44px; 
+        width: 48px; 
+        height: 48px; 
     }
     
     .carousel-btn svg { 
-        width: 22px; 
-        height: 22px; 
+        width: 24px; 
+        height: 24px; 
     }
 }
 
-@media (max-width: 480px) {
-    .project-metadata { display: none; }
-     .row-layout {
+@media (max-width: 768px) {
+    .carousel-container {
+        min-height: 500px; /* Ajuste para pantallas más pequeñas */
+    }
+}
+
+/* Ajuste específico para pantallas móviles (< 600px) */
+@media (max-width: 600px) {
+
+     .carousel-container {
+        min-height: 650px; /* Ajuste para pantallas más pequeñas */
+    }
+    
+    .project-metadata {
+        flex-direction: column;   /* Forzamos apilamiento vertical limpio */
+        gap: var(--space-8);      /* Espacio compacto entre cada ítem (4px) */
+    }
+
+    /* 1. Apila y centra verticalmente el botón Achievements y el bloque de links */
+    .card-actions.row-layout {
+        flex-direction: column;
+        align-items: center;
         justify-content: center;
+        width: 100%;
+        gap: var(--space-12);
+    }
+
+    /* 2. Asegura que GitHub y Demo permanezcan alineados al centro en su propia fila */
+    .external-links {
+        justify-content: center;
+        width: 100%;
+        gap: var(--space-16);
     }
 }
