@@ -5,8 +5,8 @@ import ActionElement from '../ActionElement.astro';
 import { Icon } from 'astro-icon/components';
 
 interface Props {
-  company: string;
-  role: string;
+  header: string;
+  entity: string;
   duration: string;
   location?: string;
   title?: string;
@@ -18,43 +18,45 @@ interface Props {
   imagePosition?: 'left' | 'right' | 'top' | 'bottom';
   animationDelay?: number;
   fallbackIcon?: string;
+  isEducation?: boolean;
 }
 
 const {
-  company, role, duration, location,
+  header, entity, duration, location,
   title, description, stack = [], github, demo, image,
   imagePosition = 'left',
   animationDelay = 0,
   fallbackIcon = 'mdi:briefcase',
+  isEducation = false,
 } = Astro.props;
 
 const hasProject = Boolean(title || description || stack.length || github || demo);
 ---
 
-<article class={`experience-card image-${imagePosition} fade-in`} style={`transition-delay: ${animationDelay}s`}>
+<article class={`timeline-card image-${imagePosition} ${isEducation ? 'is-education' : ''} fade-in`} style={`transition-delay: ${animationDelay}s`}>
     <span class="timeline-dot"></span>
 
-    <div class="experience-content">
-        <div class="experience-image-container">
+    <div class="timeline-content">
+        <div class="timeline-image-container">
             {image ? (
                 <>
-                    <Image src={image} alt="" loading="lazy" class="experience-img-bg" />
-                    <Image src={image} alt={company} loading="lazy" class="experience-img" />
+                    <Image src={image} alt="" loading="lazy" class="timeline-img-bg" />
+                    <Image src={image} alt={header} loading="lazy" class="timeline-img" />
                 </>
             ) : (
-                <div class="experience-image-placeholder">
+                <div class="timeline-image-placeholder">
                     <Icon name={fallbackIcon} />
                 </div>
             )}
         </div>
 
-        <div class="experience-info">
-            <div class="experience-header">
-                <h3>{company}</h3>
+        <div class="timeline-info">
+            <div class="timeline-header">
+                <h3>{header}</h3>
             </div>
 
             {hasProject && (
-                <div class="experience-project">
+                <div class="timeline-project">
                     {title && <h4>{title}</h4>}
                     {description && <p class="pitch">{description}</p>}
                     {stack.length > 0 && (
@@ -65,10 +67,10 @@ const hasProject = Boolean(title || description || stack.length || github || dem
                 </div>
             )}
 
-            <div class="experience-metadata">
+            <div class="timeline-metadata">
                 <div class="meta-item">
                     <Icon class="meta-icon" name="mdi:account" />
-                    <span>{role}</span>
+                    <span>{entity}</span>
                 </div>
                 <div class="meta-item">
                     <Icon class="meta-icon" name="mdi:calendar" />

@@ -2,7 +2,7 @@
 // src/components/Experience.astro
 
 import { render, getCollection } from 'astro:content';
-import ExperienceCard from './ui/cards/ExperienceCard.astro';
+import TimeLineCard from './ui/cards/TimeLineCard.astro';
 
 const allExperience = await getCollection('experience');
 ---
@@ -10,13 +10,13 @@ const allExperience = await getCollection('experience');
 <section id="experience" class="fade-in">
     <h2 class="section-title">Experience</h2>
 
-    <div class="experience-list">
+    <div class="timeline-list">
         {allExperience.map(async (experience, index) => {
             const { Content } = await render(experience);
             return (
-                <ExperienceCard
-                    company={experience.data.company}
-                    role={experience.data.role}
+                <TimeLineCard
+                    header={experience.data.company}
+                    entity={experience.data.role}
                     duration={experience.data.duration}
                     location={experience.data.location}
                     title={experience.data.title}
@@ -28,7 +28,7 @@ const allExperience = await getCollection('experience');
                     animationDelay={index * 0.2} 
                 >
                     <Content />
-                </ExperienceCard>
+                </TimeLineCard>
             );
         })}
     </div>

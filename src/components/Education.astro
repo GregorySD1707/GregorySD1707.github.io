@@ -1,0 +1,33 @@
+---
+import { render, getCollection } from 'astro:content';
+import TimeLineCard from './ui/cards/TimeLineCard.astro';
+
+const allEducation = await getCollection('education');
+---
+
+<section id="education" class="fade-in">
+    <h2 class="section-title">Education</h2>
+
+    <div class="timeline-list">
+        {allEducation.map(async (education, index) => {
+            const { Content } = await render(education);
+            
+            // Reusing TimeLineCard maps perfectly to Education data without duplicating code
+            return (
+                <TimeLineCard
+                    header={education.data.institution}
+                    entity={education.data.degree}
+                    duration={education.data.duration}
+                    location={education.data.location}
+                    animationDelay={index * 0.2} 
+                    fallbackIcon="mdi:school"
+                    imagePosition="top"
+                    image={education.data.image}
+                    isEducation={true}
+                >
+                    <Content />
+                </TimeLineCard>
+            );
+        })}
+    </div>
+</section>

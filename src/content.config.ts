@@ -33,4 +33,16 @@ const experience = defineCollection({
   }),
 });
 
-export const collections = { projects, experience };
+// Add the education collection definition[cite: 1]
+const education = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/education' }),
+  schema: ({image}) => z.object({
+    institution: z.string(),
+    degree: z.string(),
+    duration: z.string(),
+    location: z.string().optional(),
+    image: image().optional(),
+  }),
+});
+
+export const collections = { projects, experience, education };
