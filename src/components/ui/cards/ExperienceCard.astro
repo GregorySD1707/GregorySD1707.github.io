@@ -17,6 +17,7 @@ interface Props {
   image?: ImageMetadata;
   imagePosition?: 'left' | 'right' | 'top' | 'bottom';
   animationDelay?: number;
+  fallbackIcon?: string;
 }
 
 const {
@@ -24,6 +25,7 @@ const {
   title, description, stack = [], github, demo, image,
   imagePosition = 'left',
   animationDelay = 0,
+  fallbackIcon = 'mdi:briefcase',
 } = Astro.props;
 
 const hasProject = Boolean(title || description || stack.length || github || demo);
@@ -41,7 +43,7 @@ const hasProject = Boolean(title || description || stack.length || github || dem
                 </>
             ) : (
                 <div class="experience-image-placeholder">
-                    <Icon name="mdi:briefcase" />
+                    <Icon name={fallbackIcon} />
                 </div>
             )}
         </div>
