@@ -1,3 +1,4 @@
+// src/content/contact/reasons.ts
 export const contactReasons = [
   {
     id: "work",
