@@ -19,22 +19,26 @@ interface Props {
   animationDelay?: number;
   fallbackIcon?: string;
   isCentered?: boolean;
+  showConnector?: boolean;
+  viewUrl?: string;
+  downloadUrl?: string;
 }
 
 const {
   header, entity, duration, location,
-  title, description, stack = [], github, demo, image,
+  title, description, stack = [], github, demo, image, viewUrl, downloadUrl,
   imagePosition = 'left',
   animationDelay = 0,
   fallbackIcon = 'mdi:briefcase',
   isCentered = false,
+  showConnector = true,
 } = Astro.props;
 
 const hasProject = Boolean(title || description || stack.length || github || demo);
 ---
 
 <article class={`timeline-card image-${imagePosition} ${isCentered ? 'centered' : ''} fade-in`} style={`transition-delay: ${animationDelay}s`}>
-    <span class="timeline-dot"></span>
+    {showConnector && <span class="timeline-dot"></span>}
 
     <div class="timeline-content">
         <div class="timeline-image-container">
@@ -88,7 +92,7 @@ const hasProject = Boolean(title || description || stack.length || github || dem
                 <slot /> <!-- bullets del Markdown, siempre visibles -->
             </div>
 
-            {(github || demo) && (
+            {(github || demo || viewUrl || downloadUrl) && (
                  <div class="card-actions row-layout">
                     <div class="external-links">
                         {github && (
@@ -99,6 +103,16 @@ const hasProject = Boolean(title || description || stack.length || github || dem
                         {demo && (
                             <ActionElement variant="inline" iconPosition="top" text="Demo" href={demo}>
                                 <Icon slot="icon" name="mdi:play" />
+                            </ActionElement>
+                        )}
+                        {viewUrl && (
+                            <ActionElement variant="inline" iconPosition="top" text="View" href={viewUrl}>
+                                <Icon slot="icon" name="mdi:eye" />
+                            </ActionElement>
+                        )}
+                        {downloadUrl && (
+                            <ActionElement variant="inline" iconPosition="top" text="Download" href={downloadUrl} download={true}>
+                                <Icon slot="icon" name="mdi:download" />
                             </ActionElement>
                         )}
                     </div>

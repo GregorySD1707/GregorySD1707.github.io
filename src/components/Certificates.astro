@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import TimeLineCard from './ui/cards/TimeLineCard.astro';
+
+const allCertificates = await getCollection('certificates');
+---
+
+<section id="certificates" class="fade-in">
+    <h2 class="section-title">Certificates</h2>
+
+    <div class="certificates-grid">
+        {allCertificates.map((certificate, index) => {
+            const { title, issuer, issueDate, expirationDate, image, pdf } = certificate.data;
+            const dateLine = expirationDate
+                ? `Issued: ${issueDate} · Expires: ${expirationDate}`
+                : `${issueDate}`;
+            const documentUrl = `${import.meta.env.BASE_URL}documents/certificates/${pdf}`;
+
+            return (
+                <TimeLineCard
+                    header={title}
+                    entity={issuer}
+                    duration={dateLine}
+                    image={image}
+                    imagePosition="top"
+                    isCentered={true}
+                    showConnector={false}
+                    viewUrl={documentUrl}
+                    downloadUrl={documentUrl}
+                    animationDelay={index * 0.1}
+                />
+            );
+        })}
+    </div>
+</section>

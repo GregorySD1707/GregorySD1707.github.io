@@ -1,0 +1,26 @@
+/* ============================================================
+   certificates.css — Grid layout for Certificates
+   ============================================================ */
+#certificates {
+    padding: var(--space-64) 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.certificates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-24);
+    width: 100%;
+    /* 3 columns need >= 3*300 + 2*24 = 948px; a 4th would need >= 1272px.
+       1100px hard-caps the row at 3 columns (matches .skills-grid). */
+    max-width: 1100px;
+    padding: 20px 0;
+}
+
+@media (max-width: 700px) {
+    .certificates-grid {
+        grid-template-columns: 1fr;
+    }
+}

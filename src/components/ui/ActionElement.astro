@@ -6,6 +6,7 @@ interface Props {
   variant: 'primary' | 'ghost' | 'inline';
   iconPosition?: 'left' | 'right' | 'top' | 'bottom';
   customClass?: string;
+  download?: boolean;
 }
 
 const { 
@@ -13,7 +14,8 @@ const {
   href, 
   variant, 
   iconPosition = 'left', 
-  customClass = '' 
+  customClass = '',
+  download = false, 
 } = Astro.props;
 
 const Element = href ? 'a' : 'button';
@@ -33,6 +35,7 @@ const selectedClass = variantClasses[variant];
     href={href} 
     class={`${selectedClass} ${layoutClass} ${customClass}`} 
     {...(href ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+    {...(download ? { download: true } : {})}
 >
     <slot name="icon" />
     <span class="action-text">{text}</span>
