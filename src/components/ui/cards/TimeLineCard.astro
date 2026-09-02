@@ -18,7 +18,7 @@ interface Props {
   imagePosition?: 'left' | 'right' | 'top' | 'bottom';
   animationDelay?: number;
   fallbackIcon?: string;
-  isEducation?: boolean;
+  isCentered?: boolean;
 }
 
 const {
@@ -27,13 +27,13 @@ const {
   imagePosition = 'left',
   animationDelay = 0,
   fallbackIcon = 'mdi:briefcase',
-  isEducation = false,
+  isCentered = false,
 } = Astro.props;
 
 const hasProject = Boolean(title || description || stack.length || github || demo);
 ---
 
-<article class={`timeline-card image-${imagePosition} ${isEducation ? 'is-education' : ''} fade-in`} style={`transition-delay: ${animationDelay}s`}>
+<article class={`timeline-card image-${imagePosition} ${isCentered ? 'centered' : ''} fade-in`} style={`transition-delay: ${animationDelay}s`}>
     <span class="timeline-dot"></span>
 
     <div class="timeline-content">
