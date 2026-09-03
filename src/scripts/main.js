@@ -219,9 +219,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (isExpanded) {
         wrapper.classList.remove("collapsed");
-        wrapper.classList.add("expanded");
         wrapper.style.maxHeight = `${grid.scrollHeight}px`;
         if (btnText) btnText.textContent = "Show less";
+
+        // Only lift the overflow clip once the max-height transition
+        // finishes growing. Adding it immediately removed the clip
+        // before the animation played, so every row appeared at once.
+        wrapper.addEventListener("transitionend", function onExpand(e) {
+          if (e.propertyName !== "max-height") return;
+          wrapper.classList.add("expanded");
+          wrapper.removeEventListener("transitionend", onExpand);
+        });
       } else {
         wrapper.classList.remove("expanded");
         wrapper.classList.add("collapsed");
