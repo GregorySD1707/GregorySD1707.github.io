@@ -24,3 +24,34 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* ============================================================
+   Certificate card content overrides
+   Scoped to #certificates so TimeLineCard stays generic and
+   shared, unmodified, with Experience/Education.
+   ============================================================ */
+#certificates .timeline-header {
+    text-align: center;
+}
+
+#certificates .timeline-header h3 {
+    color: var(--color-accent);
+    line-height: 1.15; /* tighter than the default title line-height */
+}
+
+#certificates .timeline-metadata {
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+#certificates .timeline-metadata .meta-item {
+    font-size: var(--font-size-14);
+}
+
+#certificates .timeline-content {
+    min-height: 480px; /* set this to the computed height of your current tallest card */
+}
+
+#certificates .row-layout{
+    margin-top: var(--space-0);
+}
