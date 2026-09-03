@@ -9,19 +9,28 @@
 }
 
 .certificates-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: var(--space-24);
     width: 100%;
-    /* 3 columns need >= 3*300 + 2*24 = 948px; a 4th would need >= 1272px.
-       1100px hard-caps the row at 3 columns (matches .skills-grid). */
     max-width: 1100px;
     padding: 20px 0;
 }
 
+/* 3 cards fit at basis 320 + gap 24: 3*320 + 2*24 = 1008 <= 1100
+   (each then grows up to max-width 350 using the leftover slack).
+   A 4th would need 4*320 + 3*24 = 1352, so it always wraps to a
+   new, independently-centered line. */
+.certificates-grid > .timeline-card {
+    flex: 1 1 320px;
+    max-width: 350px;
+}
+
 @media (max-width: 700px) {
-    .certificates-grid {
-        grid-template-columns: 1fr;
+    .certificates-grid > .timeline-card {
+        flex: 1 1 100%;
+        max-width: 100%;
     }
 }
 
