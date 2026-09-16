@@ -15,6 +15,7 @@ interface Props {
   github?: string;
   demo?: string;
   image?: ImageMetadata;
+  images?: ImageMetadata[];
   imagePosition?: 'left' | 'right' | 'top' | 'bottom';
   animationDelay?: number;
   fallbackIcon?: string;
@@ -22,27 +23,38 @@ interface Props {
   showConnector?: boolean;
   viewUrl?: string;
   downloadUrl?: string;
+  customClass?: string;
 }
 
 const {
   header, entity, duration, location,
-  title, description, stack = [], github, demo, image, viewUrl, downloadUrl,
+  title, description, stack = [], github, demo, image, images,viewUrl, downloadUrl,
   imagePosition = 'left',
   animationDelay = 0,
   fallbackIcon = 'mdi:briefcase',
   isCentered = false,
   showConnector = true,
+  customClass = '',
 } = Astro.props;
 
 const hasProject = Boolean(title || description || stack.length || github || demo);
 ---
 
-<article class={`timeline-card image-${imagePosition} ${isCentered ? 'centered' : ''} fade-in`} style={`transition-delay: ${animationDelay}s`}>
+<article class={`timeline-card image-${imagePosition} ${isCentered ? 'centered' : ''} ${customClass} fade-in`} style={`transition-delay: ${animationDelay}s`}>
     {showConnector && <span class="timeline-dot"></span>}
 
     <div class="timeline-content">
         <div class="timeline-image-container">
-            {image ? (
+            {images && images.length > 1 ? (
+                <>
+                    <Image src={images[0]} alt="" loading="lazy" class="timeline-img-bg" />
+                    <div class="timeline-carousel" tabindex="0" role="group" aria-label={`${header} photos`}>
+                        {images.map((img, i) => (
+                            <Image src={img} alt={i === 0 ? header : ''} loading="lazy" class="timeline-img carousel-slide" />
+                        ))}
+                    </div>
+                </>
+            ) : image ? (
                 <>
                     <Image src={image} alt="" loading="lazy" class="timeline-img-bg" />
                     <Image src={image} alt={header} loading="lazy" class="timeline-img" />

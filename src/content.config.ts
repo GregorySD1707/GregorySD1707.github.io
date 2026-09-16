@@ -57,4 +57,20 @@ const certificates = defineCollection({
   }),
 });
 
-export const collections = { projects, experience, education, certificates };
+// src/content.config.ts
+const events = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/events' }),
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    organizer: z.string(),
+    date: z.string(),
+    category: z.string(), // "Hackathon" | "Contest" | "Conference" | ...
+    image: image().optional(), // main image for the event
+    images: z.array(image()).optional(), // only for events that want a carousel
+    certificateUrl: z.string().optional(),
+    galleryUrl: z.string().optional(),
+    size: z.enum(['normal', 'wide', 'tall', 'large']).optional(), // controls the bento span
+  }),
+});
+
+export const collections = { projects, experience, education, certificates, events };

@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import TimeLineCard from './ui/cards/TimeLineCard.astro';
+
+const allEvents = await getCollection('events');
+
+const sizeClassMap: Record<string, string> = {
+    wide: 'bento-span-2',
+    tall: 'bento-row-2',
+    large: 'bento-span-2 bento-row-2',
+};
+---
+
+<section id="events" class="fade-in">
+    <h2 class="section-title">Events</h2>
+
+    <div class="events-bento-grid">
+        {allEvents.map((event, index) => {
+            const { title, organizer, date, category, image, images, certificateUrl, galleryUrl, size } = event.data;
+
+            return (
+                <TimeLineCard
+                    header={title}
+                    entity={organizer}
+                    duration={date}
+                    image={image}
+                    images={images}
+                    imagePosition="top"
+                    showConnector={false}
+                    stack={[category]}
+                    viewUrl={galleryUrl}
+                    downloadUrl={certificateUrl}
+                    animationDelay={index * 0.1}
+                    customClass={sizeClassMap[size ?? 'normal'] ?? ''}
+                />
+            );
+        })}
+    </div>
+</section>
