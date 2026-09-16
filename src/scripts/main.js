@@ -1,3 +1,6 @@
+import { initCarousel2D } from '../scripts/carousel-2d';
+import { initCarousel3D } from '../scripts/carousel-3d';
+
 document.addEventListener("DOMContentLoaded", () => {
   // INTERSECTION OBSERVER
   const observer = new IntersectionObserver(
@@ -55,80 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Llama a resetFlippedCards() dentro de las funciones de navegación
     // navNext.addEventListener('click', ...)
     // navPrev.addEventListener('click', ...)
-  };
-
-  // --- CARRUSEL 3D ---
-  const initCarousel = () => {
-    const carousel = document.getElementById("carousel");
-    if (!carousel) return;
-
-    const cards = carousel.querySelectorAll(".carousel-card");
-    const prevBtn = document.querySelector(".prev-btn");
-    const nextBtn = document.querySelector(".next-btn");
-
-    const numCards = cards.length;
-    if (numCards === 0) return;
-
-    // Geometría: Divide 360 grados entre el número de proyectos
-    const theta = 360 / numCards;
-
-    // Calcula la profundidad (translateZ) para que las tarjetas no colisionen
-    const cardWidth = 500;
-    const paddingZ = 60;
-    const radius =
-      Math.round(cardWidth / 2 / Math.tan(Math.PI / numCards)) + paddingZ;
-
-    let currentIndex = 0;
-    let isAnimating = false;
-
-    // 1. Posicionar dinámicamente las tarjetas en el espacio 3D
-    cards.forEach((card, index) => {
-      const angle = theta * index;
-      card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
-    });
-
-    // 2. Función maestra de rotación
-    const rotateCarousel = () => {
-      const angle = theta * currentIndex * -1;
-      carousel.style.transform = `translateZ(${-radius}px) rotateY(${angle}deg)`;
-
-      // Calcular índice real activo matemáticamente
-      const activeIndex = ((currentIndex % numCards) + numCards) % numCards;
-
-      // Transición del Glow y opacidad para el estado activo
-      cards.forEach((card, index) => {
-        if (index === activeIndex) {
-          card.classList.add("active");
-        } else {
-          card.classList.remove("active");
-        }
-      });
-    };
-
-    // 3. Sistema de navegación y protección Anti-Spam
-    const handleNav = (direction) => {
-      if (isAnimating) return;
-      isAnimating = true;
-
-      currentIndex += direction;
-      rotateCarousel();
-
-      // Bloquear botones durante la animación (800ms)
-      prevBtn.disabled = true;
-      nextBtn.disabled = true;
-
-      setTimeout(() => {
-        isAnimating = false;
-        prevBtn.disabled = false;
-        nextBtn.disabled = false;
-      }, 0);
-    };
-
-    prevBtn.addEventListener("click", () => handleNav(-1));
-    nextBtn.addEventListener("click", () => handleNav(1));
-
-    // Inicializar la primera vista
-    rotateCarousel();
   };
 
   // ----------------------------------------------------
@@ -279,9 +208,13 @@ document.addEventListener("DOMContentLoaded", () => {
     sections.forEach((section) => navObserver.observe(section));
   };
 
-  initCarousel();
+  // EJECUCIÓN ORQUESTADA
   initFlipCards(); // Inicializa la funcionalidad de volteo de tarjetas
   initSkillsSpotlight();
   initSkillsToggle();
   initNavObserver();
+
+  // Inicialización de carruseles
+  initCarousel3D(); 
+  initCarousel2D();
 });

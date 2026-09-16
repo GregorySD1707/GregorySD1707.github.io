@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { render, getCollection } from 'astro:content';
 import TimeLineCard from './ui/cards/TimeLineCard.astro';
 
 const allEvents = await getCollection('events');
@@ -8,6 +8,7 @@ const sizeClassMap: Record<string, string> = {
     wide: 'bento-span-2',
     tall: 'bento-row-2',
     large: 'bento-span-2 bento-row-2',
+    single: 'bento-span-3 bento-row-1',
 };
 ---
 
@@ -15,24 +16,32 @@ const sizeClassMap: Record<string, string> = {
     <h2 class="section-title">Events</h2>
 
     <div class="events-bento-grid">
-        {allEvents.map((event, index) => {
-            const { title, organizer, date, category, image, images, certificateUrl, galleryUrl, size } = event.data;
+        {allEvents.map(async (event, index) => {
+            const { title, organizer, date, category, image, certificateUrl, galleryUrl, size, location, github } = event.data;
+
+            const { Content } = await render(event);
+
+            const documentUrl = certificateUrl ? `${import.meta.env.BASE_URL}documents/certificates/${certificateUrl}` : undefined;
 
             return (
                 <TimeLineCard
                     header={title}
                     entity={organizer}
                     duration={date}
+                    location={location}
                     image={image}
-                    images={images}
                     imagePosition="top"
                     showConnector={false}
-                    stack={[category]}
+                    stack={category}
                     viewUrl={galleryUrl}
-                    downloadUrl={certificateUrl}
+                    downloadUrl={documentUrl}
                     animationDelay={index * 0.1}
+                    github={github}
                     customClass={sizeClassMap[size ?? 'normal'] ?? ''}
-                />
+                >
+
+                    <Content />
+                </TimeLineCard>
             );
         })}
     </div>

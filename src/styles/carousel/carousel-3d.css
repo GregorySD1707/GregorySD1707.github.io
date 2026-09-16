@@ -1,0 +1,148 @@
+/* src/styles/carousel/carousel-3d.css */
+
+#carousel {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); 
+}
+
+.carousel-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-48);
+    width: 100%;
+    max-width: 1000px; /* Para evitar que ocupe de extremo a extremo en pantallas gigantes */
+    flex-wrap: wrap; /* Permite que los botones laterales se muevan debajo del carrusel en pantallas pequeñas */
+}
+
+/* ---------- MODIFICAR: Escenario 3D ---------- */
+.carousel-container {
+    perspective: 1100px;
+    width: 100%;
+    max-width: 480px;
+    min-height: 520px; /* Otorga espacio suficiente para que NINGUNA card se corte */
+    margin: 0 0;
+    position: relative;
+}
+
+/* ---------- Tarjetas de Proyectos ---------- */
+.carousel-card {
+    position: absolute; /* Reemplaza 'grid-area: card' */
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: var(--radius-16);
+    background-color: transparent;
+    border: none;
+    opacity: 0.3;
+    filter: grayscale(100%);
+    perspective: 1500px;
+    transition: opacity 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease, border-color 0.5s ease;
+}
+
+.carousel-card.active {
+    /* Estado Activo (Foco Frontal) */
+    opacity: 1;
+    filter: grayscale(0%) brightness(1);
+    border: none;
+    box-shadow: none;
+}
+
+/* Aplicamos el glow a las caras giratorias de la tarjeta activa */
+/* El Glow mágico usa la variable --project-color declarada en el HTML */
+.carousel-card.active .card-face {
+    border-color: color-mix(in srgb, var(--card-color) 30%, transparent);
+    box-shadow: 0 0 45px -10px color-mix(in srgb, var(--card-color) 40%, transparent);
+}
+
+/* Dynamic buttons matching the card color */
+.carousel-card .btn-ghost {
+    background: color-mix(in srgb, var(--card-color) 15%, transparent);
+    border-color: color-mix(in srgb, var(--card-color) 30%, transparent);
+}
+
+.carousel-card .btn-ghost:hover {
+    /*background: color-mix(in srgb, var(--project-color) 30%, transparent);*/
+    border-color: var(--card-color);
+    color: var(--card-color);
+}
+
+.carousel-card .link-inline:hover {
+    color: var(--card-color);
+}
+
+.carousel-card .link-inline:hover .action-text {
+    text-decoration-color: var(--card-color);
+}
+
+/* Remove the strict aspect ratio on small screens */
+/* ---------- MODIFICAR: Media Query Tablet / Móvil ---------- */
+@media (max-width: 900px) {
+    .carousel-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: var(--space-20);
+        justify-items: center;
+        width: 100%;
+        padding-bottom: var(--space-16);
+    }
+
+    .carousel-container {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        width: 100%;
+        max-width: 480px;
+        min-height: 500px; /* Espacio vertical seguro para que el texto no pise la fila 2 */
+        margin: 0 auto;
+    }
+
+    .project-image-container {
+        min-height: 140px;
+        max-height: 150px;
+    }
+
+    /* Ubicación explícita de los botones en la fila 2 */
+    .prev-btn {
+        grid-column: 1;
+        grid-row: 2;
+        justify-self: end; /* Los acerca al centro */
+        margin-right: var(--space-12);
+    }
+    
+    .next-btn {
+        grid-column: 2;
+        grid-row: 2;
+        justify-self: start; /* Los acerca al centro */
+        margin-left: var(--space-12);
+    }
+
+    .carousel-btn {
+        width: 48px; 
+        height: 48px; 
+    }
+    
+    .carousel-btn svg { 
+        width: 24px; 
+        height: 24px; 
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-container {
+        min-height: 500px; /* Ajuste para pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 600px) {
+
+    .carousel-container {
+        min-height: 650px; /* Ajuste para pantallas más pequeñas */
+    }
+}

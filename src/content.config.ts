@@ -30,6 +30,7 @@ const experience = defineCollection({
     github: z.url().optional(),
     demo: z.url().optional(),
     image: image().optional(),
+    website: z.url().optional(),
   }),
 });
 
@@ -64,12 +65,14 @@ const events = defineCollection({
     title: z.string(),
     organizer: z.string(),
     date: z.string(),
-    category: z.string(), // "Hackathon" | "Contest" | "Conference" | ...
-    image: image().optional(), // main image for the event
-    images: z.array(image()).optional(), // only for events that want a carousel
+    category: z.array(z.string()).optional(), // "Hackathon" | "Contest" | "Conference" | ...
+    image: z.union([image(), z.array(image())]).optional(),
+    location: z.string().optional(),
+    description: z.string().optional(),
+    github: z.url().optional(),
     certificateUrl: z.string().optional(),
     galleryUrl: z.string().optional(),
-    size: z.enum(['normal', 'wide', 'tall', 'large']).optional(), // controls the bento span
+    size: z.enum(['normal', 'wide', 'tall', 'large', 'single']).optional(), // controls the bento span
   }),
 });
 

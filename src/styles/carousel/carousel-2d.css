@@ -1,0 +1,67 @@
+/* src/styles/carousel/carousel-2d.css */
+.carousel-2d-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: var(--radius-8);
+}
+
+.carousel-2d-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-2d-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Positioning the shared buttons specifically for 2D */
+.carousel-2d-wrapper .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(15, 23, 21, 0.7); /* Slightly darker for image contrast */
+}
+
+.carousel-2d-wrapper .carousel-btn:hover:not(:disabled) {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-2d-wrapper .prev-btn { left: var(--space-8); }
+.carousel-2d-wrapper .next-btn { right: var(--space-8); }
+
+.carousel-dots {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+    background: rgba(15, 23, 21, 0.6); /* Fondo oscuro semitransparente para dar contraste */
+    padding: 6px 10px;
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(4px);
+}
+
+.carousel-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6); /* Círculo apagado */
+    transition: var(--transition-base);
+    cursor: pointer;
+}
+
+.carousel-dots .dot.active {
+    background: var(--color-accent); /* Círculo activo (blanco o tu color principal) */
+    transform: scale(1.3);
+}

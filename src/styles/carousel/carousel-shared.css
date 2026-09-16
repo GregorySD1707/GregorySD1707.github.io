@@ -1,0 +1,41 @@
+/* src/styles/carousel/carousel-shared.css */
+.carousel-btn {
+    background: var(--color-surface);
+    border: var(--border-thin) solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: var(--transition-base);
+    color: var(--color-text-main);
+    z-index: 100;  /* Evita que el cilindro 3D intercepte los clics */
+}
+
+.carousel-btn svg { width: 28px; height: 28px; fill: currentColor; }
+
+.carousel-btn:hover:not(:disabled) {
+    background: var(--color-accent);
+    color: var(--color-text-inverse);
+    transform: scale(1.1);
+}
+
+.carousel-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: scale(1);
+}
+
+@media (max-width: 900px) {
+    .carousel-btn {
+        width: 48px; 
+        height: 48px; 
+    }
+    .carousel-btn svg { 
+        width: 24px; 
+        height: 24px; 
+    }
+}

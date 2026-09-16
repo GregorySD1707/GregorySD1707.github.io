@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import ActionElement from '../ActionElement.astro';
 import { Icon } from 'astro-icon/components';
+import ImageCarousel from '../ImageCarousel2D.astro';
 
 interface Props {
   header: string;
@@ -14,8 +15,7 @@ interface Props {
   stack?: string[];
   github?: string;
   demo?: string;
-  image?: ImageMetadata;
-  images?: ImageMetadata[];
+  image?: ImageMetadata | ImageMetadata[];
   imagePosition?: 'left' | 'right' | 'top' | 'bottom';
   animationDelay?: number;
   fallbackIcon?: string;
@@ -28,7 +28,7 @@ interface Props {
 
 const {
   header, entity, duration, location,
-  title, description, stack = [], github, demo, image, images,viewUrl, downloadUrl,
+  title, description, stack = [], github, demo, image,viewUrl, downloadUrl,
   imagePosition = 'left',
   animationDelay = 0,
   fallbackIcon = 'mdi:briefcase',
@@ -36,6 +36,9 @@ const {
   showConnector = true,
   customClass = '',
 } = Astro.props;
+
+// Ensure images is always an array for the component
+const imageArray = image ? (Array.isArray(image) ? image : [image]) : [];
 
 const hasProject = Boolean(title || description || stack.length || github || demo);
 ---
@@ -45,20 +48,8 @@ const hasProject = Boolean(title || description || stack.length || github || dem
 
     <div class="timeline-content">
         <div class="timeline-image-container">
-            {images && images.length > 1 ? (
-                <>
-                    <Image src={images[0]} alt="" loading="lazy" class="timeline-img-bg" />
-                    <div class="timeline-carousel" tabindex="0" role="group" aria-label={`${header} photos`}>
-                        {images.map((img, i) => (
-                            <Image src={img} alt={i === 0 ? header : ''} loading="lazy" class="timeline-img carousel-slide" />
-                        ))}
-                    </div>
-                </>
-            ) : image ? (
-                <>
-                    <Image src={image} alt="" loading="lazy" class="timeline-img-bg" />
-                    <Image src={image} alt={header} loading="lazy" class="timeline-img" />
-                </>
+            {imageArray.length > 0 ? (
+                <ImageCarousel images={imageArray} altText={header} />
             ) : (
                 <div class="timeline-image-placeholder">
                     <Icon name={fallbackIcon} />

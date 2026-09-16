@@ -22,3 +22,10 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+src/assets/images/projects/pngs/
+src/assets/images/projects/bibiotec.webp
+src/assets/images/projects/bibiotec1.webp
+src/assets/images/projects/elderly-care.webp
+src/assets/images/projects/gregorys-kitchen.webp
+src/assets/images/projects/quito-united-observatory.webp

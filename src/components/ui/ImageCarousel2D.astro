@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  images: ImageMetadata[];
+  altText?: string;
+}
+
+const { images, altText = "Image" } = Astro.props;
+---
+
+{images.length > 1 ? (
+    <div class="carousel-2d-wrapper">
+        <div class="carousel-2d-track">
+            {images.map((img, index) => (
+                <div class="carousel-2d-slide">
+                    <!-- Background blur for aspect ratio safety -->
+                    <Image src={img} alt="" loading="lazy" class="timeline-img-bg" />
+                    <!-- Foreground image -->
+                    <Image src={img} alt={`${altText} - ${index + 1}`} loading="lazy" class="timeline-img" />
+                </div>
+            ))}
+        </div>
+        
+        <button class="carousel-btn prev-btn" aria-label="Previous image">
+            <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+        <button class="carousel-btn next-btn" aria-label="Next image">
+            <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </button>
+        <div class="carousel-dots">
+            {images.map((_, index) => (
+                <span class={`dot ${index === 0 ? 'active' : ''}`} data-index={index}></span>
+            ))}
+        </div>
+    </div>
+) : (
+    /* Fallback to single image if only one is provided (KISS) */
+    <div class="carousel-2d-wrapper">
+        {images[0] && (
+            <>
+                <Image src={images[0]} alt="" loading="lazy" class="timeline-img-bg" />
+                <Image src={images[0]} alt={altText} loading="lazy" class="timeline-img" />
+            </>
+        )}
+    </div>
+)}

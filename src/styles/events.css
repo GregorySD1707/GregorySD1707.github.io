@@ -24,6 +24,9 @@
 .events-bento-grid .bento-span-2 { grid-column: span 2; }
 .events-bento-grid .bento-row-2  { grid-row: span 2; }
 
+.events-bento-grid .bento-span-3 { grid-column: span 3; }
+.events-bento-grid .bento-row-3  { grid-row: span 3; }
+
 .timeline-carousel {
     position: relative;
     z-index: 1;
@@ -49,12 +52,31 @@
     height: 100%;
 }
 
+#events .timeline-project {
+    text-align: center;
+}
+
+#events .tech-stack {
+    justify-content: center;
+}
+
+#events .timeline-header h3 {
+    color: var(--color-accent);
+    line-height: 1.15; /* tighter than the default title line-height */
+}
+
 @media (max-width: 700px) {
     .events-bento-grid {
         grid-template-columns: 1fr;
     }
     .events-bento-grid .bento-span-2,
     .events-bento-grid .bento-row-2 {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .events-bento-grid .bento-span-3,
+    .events-bento-grid .bento-row-3 {
         grid-column: span 1;
         grid-row: span 1;
     }
@@ -66,7 +88,10 @@
 }
 
 #events .timeline-metadata {
-    flex-direction: column;
-    gap: var(--space-8);
     align-items: center;
+    justify-content: center;    
+}
+
+#events p {
+    text-align: center;
 }
