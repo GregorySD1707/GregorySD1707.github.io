@@ -1,5 +1,8 @@
 import { initCarousel2D } from '../scripts/carousel-2d';
 import { initCarousel3D } from '../scripts/carousel-3d';
+import { useTranslations, getSafeLang } from '../i18n/utils';
+const lang = getSafeLang(document.documentElement.lang);
+const t = useTranslations(lang);
 
 document.addEventListener("DOMContentLoaded", () => {
   // INTERSECTION OBSERVER
@@ -149,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isExpanded) {
         wrapper.classList.remove("collapsed");
         wrapper.style.maxHeight = `${grid.scrollHeight}px`;
-        if (btnText) btnText.textContent = "Show less";
+        if (btnText) btnText.textContent = t('skills.showLess');
 
         // Only lift the overflow clip once the max-height transition
         // finishes growing. Adding it immediately removed the clip
@@ -163,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
         wrapper.classList.remove("expanded");
         wrapper.classList.add("collapsed");
         updateGridHeight();
-        if (btnText) btnText.textContent = "Show more";
+        if (btnText) btnText.textContent = t('skills.showMore');
         wrapper.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }
     });

@@ -14,6 +14,7 @@ import yoloIcon from '../../assets/images/skills/yolo.webp';
 
 export interface Skill {
   name: string;
+  name_es?: string; // Nombre en español (opcional)
   icon: string | ImageMetadata; // Puede ser un string (para iconos de la librería) o un objeto ImageMetadata (para imágenes locales)
 }
 
@@ -50,13 +51,13 @@ export const skills: Skill[] = [
   { name: "PHP", icon: "logos:php" },
 
   // Soft Skills
-  { name: "Self-learning", icon: "mdi:head-lightbulb" },
-  { name: "Conflict resolution", icon: "mdi:handshake" },
-  { name: "Technical leadership", icon: "mdi:account-star" },
-  { name: "Teamwork", icon: "mdi:account-group" },
-  { name: "Effective communication", icon: "mdi:chat-processing" },
-  { name: "Adaptability", icon: "mdi:autorenew" },
-  { name: "Requirements analysis", icon: "mdi:clipboard-text-search" },
+  { name: "Self-learning", name_es: "Aprendizaje autónomo", icon: "mdi:head-lightbulb" },
+  { name: "Conflict resolution", name_es: "Resolución de conflictos", icon: "mdi:handshake" },
+  { name: "Technical leadership", name_es: "Liderazgo técnico", icon: "mdi:account-star" },
+  { name: "Teamwork", name_es: "Trabajo en equipo", icon: "mdi:account-group" },
+  { name: "Effective communication", name_es: "Comunicación efectiva", icon: "mdi:chat-processing" },
+  { name: "Adaptability", name_es: "Adaptabilidad", icon: "mdi:autorenew" },
+  { name: "Requirements analysis", name_es: "Análisis de requisitos", icon: "mdi:clipboard-text-search" },
 
   { name: "Django", icon: "logos:django-icon" },
 

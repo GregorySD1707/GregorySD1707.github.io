@@ -24,6 +24,10 @@ export const ui = {
     'hero.roles.developer': 'Full Stack Developer',
     'hero.description': '4+ years developing collaborative projects. Specialized in full stack development, databases, and computer vision AI. Located in Quito, Ecuador.',
     'action.downloadCv': 'Download CV',
+
+    // Sección Skills
+    'skills.showMore': 'Show more',
+    'skills.showLess': 'Show less',
     
     // Botones de acción
     'actions.view': 'View',
@@ -57,5 +61,9 @@ export const ui = {
     'actions.download': 'Descargar',
     'actions.achievements': 'Logros',
     'actions.back': 'Volver',
+
+    // Sección Skills
+    'skills.showMore': 'Mostrar más',
+    'skills.showLess': 'Mostrar menos',
   },
 } as const;
