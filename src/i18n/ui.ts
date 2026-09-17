@@ -9,14 +9,14 @@ export const ui = {
     'meta.title': 'Gregory Salazar | Portfolio',
 
     // Barra de navegación y t´tulos de secciones
-    'nav.home': 'Home',
-    'nav.experience': 'Experience',
-    'nav.projects': 'Projects',
-    'nav.certificates': 'Certificates',
-    'nav.education': 'Education',
-    'nav.events': 'Events',
-    'nav.skills': 'Skills',
-    'nav.contact': 'Contact',
+    'home.name': 'Home',
+    'experience.name': 'Experience',
+    'projects.name': 'Projects',
+    'certificates.name': 'Certificates',
+    'education.name': 'Education',
+    'events.name': 'Events',
+    'skills.name': 'Skills',
+    'contact.name': 'Contact',
 
     // Sección Hero
     'hero.kicker': "Hi, I'm",
@@ -36,14 +36,14 @@ export const ui = {
     'meta.title': 'Gregory Salazar | Portafolio',
 
     // Barra de navegación y títulos de secciones
-    'nav.home': 'Inicio',
-    'nav.experience': 'Experiencia',
-    'nav.projects': 'Proyectos',
-    'nav.certificates': 'Certificados',
-    'nav.education': 'Educación',
-    'nav.events': 'Eventos',
-    'nav.skills': 'Habilidades',
-    'nav.contact': 'Contacto',
+    'home.name': 'Inicio',
+    'experience.name': 'Experiencia',
+    'projects.name': 'Proyectos',
+    'certificates.name': 'Certificados',
+    'education.name': 'Educación',
+    'events.name': 'Eventos',
+    'skills.name': 'Habilidades',
+    'contact.name': 'Contacto',
 
     // Sección Hero
     'hero.kicker': 'Hola, soy',
