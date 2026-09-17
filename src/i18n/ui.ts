@@ -20,7 +20,7 @@ const en = {
     // Sección Hero
     'hero.kicker': "Hi, I'm",
     'hero.roles.student': 'Software Engineering Student',
-    'hero.roles.developer': 'Full Stack Developer',
+    'hero.roles.developer': 'Junior Full Stack Developer',
     'hero.description': '4+ years developing collaborative projects. Specialized in full stack development, databases, and computer vision AI. Located in Quito, Ecuador.',
     'action.downloadCv': 'Download CV',
 
@@ -104,7 +104,7 @@ const es: Record<TranslationKey, string> = {
     // Sección Hero
     'hero.kicker': 'Hola, soy',
     'hero.roles.student': 'Estudiante de Ingeniería de Software',
-    'hero.roles.developer': 'Desarrollador Full Stack',
+    'hero.roles.developer': 'Desarrollador Junior Full Stack',
     'hero.description': 'Más de 4 años desarrollando proyectos colaborativos. Especializado en desarrollo full stack, Bases de Datos e IA de visión por computadora. Ubicado en Quito, Ecuador.',
     'action.downloadCv': 'Descargar CV',
 
