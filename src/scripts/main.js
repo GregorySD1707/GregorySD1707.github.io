@@ -1,6 +1,7 @@
 import { initCarousel2D } from '../scripts/carousel-2d';
 import { initCarousel3D } from '../scripts/carousel-3d';
 import { initNavObserver, initHeaderScroll } from '../scripts/nav-observer';
+import { initNavToggle } from '../scripts/nav-toggle';
 import { useTranslations, getSafeLang } from '../i18n/utils';
 const lang = getSafeLang(document.documentElement.lang);
 const t = useTranslations(lang);
@@ -189,6 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initNavObserver();
   initHeaderScroll();
+  initNavToggle();
 
   // Inicialización de carruseles
   initCarousel3D(); 

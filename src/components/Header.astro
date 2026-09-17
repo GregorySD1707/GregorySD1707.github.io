@@ -1,23 +1,57 @@
 ---
-// src/components/Header.astro
 import { useTranslations, getSafeLang } from '../i18n/utils';
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import { Icon } from 'astro-icon/components';
 import LanguageSwitcher from '../components/ui/LanguageSwitcher.astro';
 
 const t = useTranslations(Astro.currentLocale);
 const homeHref = getRelativeLocaleUrl(getSafeLang(Astro.currentLocale), '/');
+
+const navItems = [
+  { href: '#home', labelKey: 'home.name', icon: 'mdi:home' },
+  { href: '#experience', labelKey: 'experience.name', icon: 'mdi:briefcase' },
+  { href: '#projects', labelKey: 'projects.name', icon: 'mdi:folder' },
+  { href: '#education', labelKey: 'education.name', icon: 'mdi:school' },
+  { href: '#certificates', labelKey: 'certificates.name', icon: 'mdi:achievement' },
+  { href: '#events', labelKey: 'events.name', icon: 'mdi:calendar' },
+  { href: '#skills', labelKey: 'skills.name', icon: 'mdi:head-lightbulb' },
+  { href: '#contact', labelKey: 'contact.name', icon: 'mdi:chat-processing' },
+] as const;
 ---
 <header class="fade-in">
     <a href={homeHref} class="logo">Gregory SD</a>
+
     <nav id="nav-menu">
-        <a href="#home">{t('home.name')}</a>
-        <a href="#experience">{t('experience.name')}</a>
-        <a href="#projects">{t('projects.name')}</a>
-        <a href="#education">{t('education.name')}</a>
-        <a href="#certificates">{t('certificates.name')}</a>
-        <a href="#events">{t('events.name')}</a>
-        <a href="#skills">{t('skills.name')}</a>
-        <a href="#contact">{t('contact.name')}</a>
+        <button
+            id="nav-close"
+            class="nav-close"
+            type="button"
+            aria-label={t('nav.toggleLabel')}
+        >
+            <Icon name="mdi:close" class="nav-close-icon" aria-hidden="true" />
+        </button>
+        {navItems.map(({ href, labelKey, icon }) => (
+            <a href={href}>
+                <Icon name={icon} class="nav-link-icon" aria-hidden="true" />
+                <span>{t(labelKey)}</span>
+            </a>
+        ))}
     </nav>
-    <LanguageSwitcher />
+
+    <div class="header-actions">
+        <LanguageSwitcher />
+        <button
+            id="nav-toggle"
+            class="nav-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="nav-menu"
+            aria-label={t('nav.toggleLabel')}
+        >
+            <Icon name="mdi:menu" class="nav-toggle-icon icon-open" aria-hidden="true" />
+            <Icon name="mdi:close" class="nav-toggle-icon icon-close" aria-hidden="true" />
+        </button>
+    </div>
 </header>
+
+<div id="nav-overlay" class="nav-overlay"></div>

@@ -25,7 +25,8 @@ export default defineConfig({
           'arrow-left', 'play', 'github', 'linkedin', 'email', 'folder', 
           'head-lightbulb', 'handshake', 'account-star', 'account-group', 
           'chat-processing', 'autorenew', 'clipboard-text-search', 'reiterate', 
-          'briefcase', 'school', 'eye', 'check', 'close', 'alert','information'],
+          'briefcase', 'school', 'eye', 'check', 'close', 'alert','information',
+          'menu', 'home'],
       },
     }),],
 });

@@ -11,7 +11,7 @@ header {
     border-bottom: var(--border-thin) solid rgba(255, 255, 255, 0.05);
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 1100;
     /* Transición suave para el cambio de padding si decides reducirlo al scroll */
     /*
     transition: padding 1s cubic-bezier(0.4, 0, 0.2, 1);
@@ -49,6 +49,65 @@ header::before {
 header.scrolled::before {
     opacity: 1;
 }
+.nav-toggle {
+    position: relative;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-8);
+    color: var(--color-text-main);
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.2s ease;
+}
+
+.nav-toggle:hover { background: rgba(255, 255, 255, 0.08); }
+
+.nav-toggle-icon {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 24px;
+    height: 24px;
+    transition: opacity 0.15s ease;
+}
+
+.nav-toggle .icon-close { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .icon-open { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .icon-close { opacity: 1; }
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
+    flex-shrink: 0;
+}
+
+/* Dark backdrop, sits below the header but above the page content */
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1050;
+}
+
+.nav-overlay.nav-overlay-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.nav-scroll-lock { overflow: hidden; }
+
+.no-resize-transition #nav-menu {
+    transition: none !important;
+}
 
 .logo { 
     font-size: var(--font-size-20); 
@@ -63,6 +122,9 @@ header.scrolled::before {
 nav { display: flex; gap: var(--space-32); }
 
 nav a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
     position: relative;
     color: var(--color-text-muted);
     font-size: var(--font-size-16);
@@ -70,6 +132,36 @@ nav a {
     text-underline-offset: 4px;
     font-weight: 500;
     transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+}
+
+.nav-link-icon {
+    display: none;   /* hidden on desktop, only relevant in the drawer */
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+/* ---------- Mobile Close Button ---------- */
+.nav-close {
+    display: none;
+    align-self: flex-end;
+    background: transparent;
+    border: none;
+    color: var(--color-text-main);
+    cursor: pointer;
+    padding: var(--space-8);
+    border-radius: var(--radius-8);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-close:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-accent);
+}
+
+.nav-close-icon {
+    width: 24px;
+    height: 24px;
 }
 
 /* 1. Línea inferior sutil (oculta inicialmente mediante scaleX(0)) */
@@ -105,17 +197,6 @@ nav a.active::after {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
-
-.nav-toggle {
-   display: none;
-   background: transparent;
-   border: none;
-   color: var(--color-text-main);
-   cursor: pointer;
-   padding: var(--space-8);
-}
-
-.nav-toggle svg { width: 28px; height: 28px; }
 
 /* ---------- Buttons ---------- */
 
@@ -286,18 +367,40 @@ nav a.active::after {
     color: var(--color-text-inverse);
 }
 
-/* ---------- Responsive Header ---------- */
-@media (max-width: 1023px) {
+@media (max-width: 1100px) {
     header {
-        flex-direction: column; /* Apila el logo y la navegación */
-        gap: var(--space-16);
+        flex-direction: row;
         padding: var(--space-16) 5%;
     }
-    
+
     nav {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap; /* Permite que los enlaces bajen de línea si la pantalla es minúscula */
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100dvh;              /* visible viewport height, not document height */
+        width: min(40vw, 320px);
+        flex-direction: column;
+        align-items: flex-start;
         gap: var(--space-24);
+        padding: calc(var(--space-4) + var(--space-16)) var(--space-24) var(--space-24);
+        background: var(--color-bg-900);   /* solid, not translucent */
+        border-left: var(--border-thin) solid rgba(255, 255, 255, 0.08);
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1060;               /* above overlay, below header */
+        overflow-y: auto;
     }
+
+    nav.nav-open { transform: translateX(0); }
+
+    .nav-toggle { display: inline-flex; }
+
+    .nav-close {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .nav-link-icon { display: inline-flex; }
+    
 }

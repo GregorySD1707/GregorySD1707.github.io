@@ -7,7 +7,7 @@ const en = {
     // meta información
     'meta.title': 'Gregory Salazar | Portfolio',
 
-    // Barra de navegación y t´tulos de secciones
+    // Barra de navegación y títulos de secciones
     'home.name': 'Home',
     'experience.name': 'Experience',
     'projects.name': 'Projects',
@@ -16,6 +16,7 @@ const en = {
     'events.name': 'Events',
     'skills.name': 'Skills',
     'contact.name': 'Contact',
+    'nav.toggleLabel': 'Toggle navigation',
 
     // Sección Hero
     'hero.kicker': "Hi, I'm",
@@ -100,6 +101,7 @@ const es: Record<TranslationKey, string> = {
     'events.name': 'Eventos',
     'skills.name': 'Habilidades',
     'contact.name': 'Contacto',
+    'nav.toggleLabel': 'Alternar navegación',
 
     // Sección Hero
     'hero.kicker': 'Hola, soy',
