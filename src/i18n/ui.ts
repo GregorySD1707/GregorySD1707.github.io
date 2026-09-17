@@ -8,7 +8,7 @@ export const ui = {
     // meta información
     'meta.title': 'Gregory Salazar | Portfolio',
 
-    // Barra de navegación
+    // Barra de navegación y t´tulos de secciones
     'nav.home': 'Home',
     'nav.experience': 'Experience',
     'nav.projects': 'Projects',
@@ -25,13 +25,15 @@ export const ui = {
     'hero.description': '4+ years developing collaborative projects. Specialized in full stack development, databases, and computer vision AI. Located in Quito, Ecuador.',
     'action.downloadCv': 'Download CV',
     
-    // ...resto de strings estáticos
+    // Botones de acción
+    'actions.view': 'View',
+    'actions.download': 'Download',
   },
   es: {
     // meta información
     'meta.title': 'Gregory Salazar | Portafolio',
 
-    // Barra de navegación
+    // Barra de navegación y títulos de secciones
     'nav.home': 'Inicio',
     'nav.experience': 'Experiencia',
     'nav.projects': 'Proyectos',
@@ -47,5 +49,9 @@ export const ui = {
     'hero.roles.developer': 'Desarrollador Full Stack',
     'hero.description': 'Más de 4 años desarrollando proyectos colaborativos. Especializado en desarrollo full stack, Bases de Datos e IA de visión por computadora. Ubicado en Quito, Ecuador.',
     'action.downloadCv': 'Descargar CV',
+
+    // Botones de acción
+    'actions.view': 'Ver',
+    'actions.download': 'Descargar',
   },
 } as const;

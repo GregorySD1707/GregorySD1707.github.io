@@ -5,6 +5,9 @@ import ActionElement from '../ActionElement.astro';
 import { Icon } from 'astro-icon/components';
 import ImageCarousel from '../ImageCarousel2D.astro';
 
+import { useTranslations } from '../../../i18n/utils';
+const t = useTranslations(Astro.currentLocale);
+
 interface Props {
   header: string;
   entity: string;
@@ -109,12 +112,12 @@ const hasProject = Boolean(title || description || stack.length || github || dem
                             </ActionElement>
                         )}
                         {viewUrl && (
-                            <ActionElement variant="inline" iconPosition="top" text="View" href={viewUrl}>
+                            <ActionElement variant="inline" iconPosition="top" text={t('actions.view')} href={viewUrl}>
                                 <Icon slot="icon" name="mdi:eye" />
                             </ActionElement>
                         )}
                         {downloadUrl && (
-                            <ActionElement variant="inline" iconPosition="top" text="Download" href={downloadUrl} download={true}>
+                            <ActionElement variant="inline" iconPosition="top" text={t('actions.download')} href={downloadUrl} download={true}>
                                 <Icon slot="icon" name="mdi:download" />
                             </ActionElement>
                         )}

@@ -4,11 +4,20 @@
 import { render, getCollection } from 'astro:content';
 import TimeLineCard from './ui/cards/TimeLineCard.astro';
 
-const allExperience = await getCollection('experience');
+import { useTranslations, getSafeLang } from '../i18n/utils';
+const t = useTranslations(Astro.currentLocale);
+
+// Para cargar los .md según el idioma actual, se utiliza getSafeLang para obtener el 
+// idioma seguro y luego se filtra la colección de experiencia para que solo incluya 
+// las entradas que comienzan con el idioma actual
+const lang = getSafeLang(Astro.currentLocale);
+const allExperience = await getCollection('experience', (entry) =>
+  entry.id.startsWith(`${lang}/`)
+);
 ---
 
 <section id="experience" class="fade-in">
-    <h2 class="section-title">Experience</h2>
+    <h2 class="section-title">{t('nav.experience')}</h2>
 
     <div class="timeline-list">
         {allExperience.map(async (experience, index) => {
