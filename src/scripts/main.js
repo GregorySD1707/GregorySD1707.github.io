@@ -1,5 +1,6 @@
 import { initCarousel2D } from '../scripts/carousel-2d';
 import { initCarousel3D } from '../scripts/carousel-3d';
+import { initNavObserver } from '../scripts/nav-observer';
 import { useTranslations, getSafeLang } from '../i18n/utils';
 const lang = getSafeLang(document.documentElement.lang);
 const t = useTranslations(lang);
@@ -179,36 +180,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     updateGridHeight();
-  };
-
-  // ----------------------------------------------------
-  // Indicador dinámico de sección activa en Navbar
-  // ----------------------------------------------------
-  const initNavObserver = () => {
-    const sections = document.querySelectorAll("section[id]");
-    const navLinks = document.querySelectorAll('#nav-menu a[href^="#"]');
-
-    if (!sections.length || !navLinks.length) return;
-
-    const navObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const activeId = entry.target.getAttribute("id");
-            navLinks.forEach((link) => {
-              const isActive = link.getAttribute("href") === `#${activeId}`;
-              link.classList.toggle("active", isActive);
-            });
-          }
-        });
-      },
-      {
-        rootMargin: "-20% 0px -50% 0px",
-        threshold: 0,
-      }
-    );
-
-    sections.forEach((section) => navObserver.observe(section));
   };
 
   // EJECUCIÓN ORQUESTADA
