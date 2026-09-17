@@ -1,9 +1,9 @@
 ---
 company: "Imagen Sistemas - FIS EPN"
-role: "Logística y Soporte Técnico"
+role: "Soporte Logístico"
 duration: "Noviembre 2024 - Diciembre 2025"
 location: "Quito, Ecuador"
-stack: ["Logísticas de eventos", "Asistencia y servicio de infraestructura", "Conocimientos de TI"]
+stack: ["Logística de eventos", "Eventos tecnológicos", "Difusión e intercambio de conocimientos en TI"]
 image: "../../../assets/images/experience/imagen-sistemas.webp"
 website: "https://imagenfis.epn.edu.ec/index.php/quienes-somos/descripcion"
 ---

@@ -6,4 +6,4 @@ location: "Quito, Ecuador"
 stack: ["Sales", "Inventory Management", "Customer Support"]
 
 ---
-Provided customer service for essential product sales. Developed effective communication with customers, agile problem-solving under pressure, and team collaboration
+Provided customer service for essential product sales. Developed effective communication with customers, agile problem-solving under pressure, and team collaboration.

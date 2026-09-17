@@ -2,7 +2,7 @@
 title: "EconoMe"
 description: "Personal Financial Management System"
 stack: ["Java", "Maven", "Scrum", "Azure DevOps", "TDD", "PostgreSQL", "CI/CD", "Agile"]
-role: "Technical Lead"
+role: "Technical Lead and Full Stack Developer"
 location: "Quito - Ecuador"
 duration: "October 2025 – January 2026"
 github: "https://github.com/GregorySD1707/GR01_1BT3_622_25B"

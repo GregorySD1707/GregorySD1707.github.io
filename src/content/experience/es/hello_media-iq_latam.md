@@ -8,4 +8,4 @@ image: "../../../assets/images/experience/hello_media-iq_latam.webp"
 website: "https://iqlatam.com/"
 ---
 
-Me encuentro desarrollando sitios web y aplicaciones multiplataforma, automaticé procesos con n8n e implementé estrategias de posicionamiento SEO, GEO y AEO.
+Me encuentro desarrollando sitios web y aplicaciones multiplataforma, automatizando procesos con n8n e implementando estrategias de posicionamiento SEO, GEO y AEO.

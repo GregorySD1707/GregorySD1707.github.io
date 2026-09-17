@@ -1,6 +1,6 @@
 ---
 title: "Third Place Internationally - GP+ League"
-organizer: "Project Manage Institue (PMI)"
+organizer: "Project Management Institue (PMI)"
 date: "February 2026 – June 2026"
 category: ["International Academic Competition", "Road safety", "Sustainable mobility", "Strategic consulting"]
 location: "Ibero-America | Quito - Ecuador"

@@ -1,7 +1,7 @@
 ---
 title: "Notable"
 description: "Biblioteca Digital Colaborativa"
-stack: ["Python", "Django", "SQLite", "ORM", "Diseñero de Bases de Datos",  "Behavior-Driven Development (BDD)", "Gherkin", "Behave"]
+stack: ["Python", "Django", "SQLite", "ORM", "Diseño de Bases de Datos",  "Behavior-Driven Development (BDD)", "Gherkin", "Behave"]
 role: "Desarrollador Full Stack"
 location: "Quito - Ecuador"
 duration: "Mayo 2026 – Julio 2026"

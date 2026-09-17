@@ -1,5 +1,5 @@
 ---
-title: "Kali Linux for Beginners (Ethical Hacking)"
+title: "Kali Linux para Principiantes (Hacking Etico)"
 issuer: "Udemy - Dr. Sang Guun Yoo"
 issueDate: "Enero 2025"
 image: "../../../assets/images/certificates/udemy/Certificate-Kali_Linux_para_Principiantes_Hacking_Etico-Gregory_Salazar.webp"

@@ -10,6 +10,6 @@ demo: "https://www.youtube.com/watch?v=xViBzAS5pCU"
 image: "../../../assets/images/projects/the-color-out-of-space.webp"
 ---
 
-- Implementé un sistema completo de iluminación dinámica con **luces puntuales y luces direccionales** (linterna de la cámara y haz de abducción del OVNI), además de luces direccionales con un estilo de ambiente nocturno.
+- Implementé un sistema completo de iluminación dinámica con **point lights, spot lights y directional lights** (linterna de la cámara y haz de abducción del OVNI), además de luces direccionales con un estilo de ambiente nocturno.
 
 - Desarrollé una mecánica interactiva de abducción por OVNI con detección cilíndrica, usando una animación de elevación procedural con interpolación suave.

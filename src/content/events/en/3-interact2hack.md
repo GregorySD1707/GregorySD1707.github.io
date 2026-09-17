@@ -1,7 +1,7 @@
 ---
 title: "Finalists of the Deuna! challenge - Interact2Hack"
 organizer: "San Francisco de Quito University - USFQ"
-date: "Abril 2026"
+date: "April 2026"
 category: ["Hackathon", "Data Science", "Business Analytics", "Dashboard Development", "Customer Retention"]
 location: "Quito - Ecuador"
 galleryUrl: "https://www.linkedin.com/feed/update/urn:li:activity:7452445929820807168/"

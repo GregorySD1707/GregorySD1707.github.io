@@ -9,6 +9,6 @@ github: "https://github.com/CineMax-Diseno-De-Software-GR3SW/CineMax"
 image: "../../../assets/images/projects/cinemax.webp"
 ---
 
-- Colaborativamente diseñé una aplicación Java aplicando **principios SOLID** y patrones de diseño, gestionando relaciones complejas entre las entidades Películas, Salas, Entradas, Empleados y Reportes.
+- Diseñé junto a mi equipo una aplicación Java aplicando **principios SOLID** y patrones de diseño, gestionando relaciones complejas entre las entidades Películas, Salas, Entradas, Empleados y Reportes.
 
 - Diseñé una arquitectura de ventas escalable que permite ampliar los servicios en el futuro (venta de alimentos y merchandising).

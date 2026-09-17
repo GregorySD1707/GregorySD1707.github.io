@@ -1,5 +1,5 @@
 ---
-title: "Cybersecurity - CompTIA Security+"
+title: "Ciberseguridad - CompTIА Security+"
 issuer: "Udemy - Dr. Sang Guun Yoo"
 issueDate: "Octubre 2025"
 image: "../../../assets/images/certificates/udemy/Certificate-Ciberseguridad-CompTIA_Security_+_Módulo_1-Gregory_Salazar.webp"
