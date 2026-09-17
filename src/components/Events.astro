@@ -1,8 +1,11 @@
 ---
 import { render, getCollection } from 'astro:content';
 import TimeLineCard from './ui/cards/TimeLineCard.astro';
+import { useTranslations, getSafeLang } from '../i18n/utils';
 
-const allEvents = await getCollection('events');
+const lang = getSafeLang(Astro.currentLocale);
+const allEvents = await getCollection('events', entry => entry.id.startsWith(`${lang}/`));
+const t = useTranslations(Astro.currentLocale);
 
 const sizeClassMap: Record<string, string> = {
     wide: 'bento-span-2',
@@ -13,7 +16,7 @@ const sizeClassMap: Record<string, string> = {
 ---
 
 <section id="events" class="fade-in">
-    <h2 class="section-title">Events</h2>
+    <h2 class="section-title">{t('events.name')}</h2>
 
     <div class="events-bento-grid">
         {allEvents.map(async (event, index) => {

@@ -8,10 +8,10 @@ galleryUrl: "https://www.linkedin.com/feed/update/urn:li:activity:74524459298208
 github: "https://github.com/FernandoHuilca/Interact2hack_DeUna_Reto"
 size: "single"
 image:
-  - ../../assets/images/events/interact2hack/1.webp
-  - ../../assets/images/events/interact2hack/2.webp
-  - ../../assets/images/events/interact2hack/3.webp
-  - ../../assets/images/events/interact2hack/4.webp
+  - ../../../assets/images/events/interact2hack/1.webp
+  - ../../../assets/images/events/interact2hack/2.webp
+  - ../../../assets/images/events/interact2hack/3.webp
+  - ../../../assets/images/events/interact2hack/4.webp
 ---
 
-I collaborated on the design and development of a commercial retention dashboard using Python and Streamlit to help Deuna! prevent customer churn.
+Collaborated on the design and development of a commercial retention dashboard using Python and Streamlit to help Deuna! prevent customer churn.
