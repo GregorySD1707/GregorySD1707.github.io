@@ -26,3 +26,13 @@ const options = (Object.keys(languages) as Lang[]).map((lang) => ({
     </a>
   ))}
 </div>
+
+<script>
+  import { initLangSwitcherScroll } from '../../scripts/language-switcher';
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLangSwitcherScroll);
+  } else {
+    initLangSwitcherScroll();
+  }
+</script>
