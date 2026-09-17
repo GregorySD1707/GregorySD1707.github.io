@@ -1,5 +1,6 @@
 // src/scripts/formhandler.ts
 import { showModal } from './modal';
+import { localizeText, getSafeLang, useTranslations } from '../i18n/utils';
 
 export interface Web3FormsResponse {
     success: boolean;
@@ -16,6 +17,9 @@ const VALIDATABLE_ELEMENTS_SELECTOR = 'input:not([type="hidden"]):not([type="che
  * Validates an individual input/textarea field in real-time.
  */
 function validateField(field: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement): boolean {
+    const lang = getSafeLang(document.documentElement.lang);
+    const t = useTranslations(lang);
+    
     // Si el contenedor padre está oculto, no se valida
     const parent = field.closest('.extra-field');
     if (parent && (parent as HTMLElement).style.display === 'none') {
@@ -26,11 +30,15 @@ function validateField(field: HTMLInputElement | HTMLTextAreaElement | HTMLSelec
     let errorMessage = '';
 
     const value = field.value.trim();
+    const maxLength = field.getAttribute('maxlength');
 
     if (field.hasAttribute('required') && value === '') {
-        errorMessage = 'This field cannot be empty or contain only spaces.';
+        errorMessage = t('field.error.required');
     } else if (field.type === 'email' && value !== '' && !EMAIL_REGEX.test(value)) {
-        errorMessage = 'Please enter a valid email address.';
+        errorMessage = t('field.error.email');
+    } else if (maxLength && field.value.length >= parseInt(maxLength, 10)) {
+        // Triggers the exact 500 error message
+        errorMessage = t('field.error.maxLength');
     }
 
     if (errorMessage) {
@@ -76,10 +84,13 @@ function setupDynamicReason(form: HTMLFormElement): void {
     const extraFields = form.querySelectorAll<HTMLElement>('.extra-field');
 
     const updateReasonState = (activeRadio: HTMLInputElement) => {
+        const lang = getSafeLang(document.documentElement.lang);
+        const t = useTranslations(lang);
+        
         const config = JSON.parse(activeRadio.dataset.reasonConfig || '{}');
 
         // A. Actualizar Placeholder
-        if (textarea) textarea.placeholder = config.placeholder || '';
+        if (textarea) textarea.placeholder = localizeText(config.placeholder, lang);
 
         // B. Mostrar/Ocultar y alternar 'required' en campos extra
         extraFields.forEach(fieldContainer => {
@@ -129,6 +140,9 @@ function getValidatableFields(form: HTMLFormElement) {
  * Initializes character counters for textareas with a maxlength attribute.
  */
 export function setupCharacterCounters(form: HTMLFormElement): void {
+    const lang = getSafeLang(document.documentElement.lang);
+    const t = useTranslations(lang);
+    
     const textareas = form.querySelectorAll<HTMLTextAreaElement>('textarea[maxlength]');
 
     textareas.forEach((textarea) => {
@@ -143,10 +157,16 @@ export function setupCharacterCounters(form: HTMLFormElement): void {
 
             if (currentLength >= maxLength) {
                 counter.className = 'char-counter limit-reached';
-            } else if (currentLength >= maxLength * 0.9) {
-                counter.className = 'char-counter limit-near';
+                validateField(textarea);
             } else {
-                counter.className = 'char-counter';
+                counter.className = currentLength >= maxLength * 0.9 ? 'char-counter limit-near' : 'char-counter';
+                
+                // Clears the max-length error dynamically when backing under 500 chars
+                const errorSpan = form.querySelector<HTMLElement>(`#error-${CSS.escape(textarea.id)}`);
+                if (errorSpan && errorSpan.textContent === t('field.error.maxLength')) {
+                    errorSpan.textContent = '';
+                    textarea.setAttribute('aria-invalid', 'false');
+                }
             }
         };
 
@@ -159,6 +179,9 @@ export function setupCharacterCounters(form: HTMLFormElement): void {
  * Handles asynchronous submission, local rate-limiting, and form validation.
  */
 export function setupFormHandler(form: HTMLFormElement): void {
+    const lang = getSafeLang(document.documentElement.lang);
+    const t = useTranslations(lang);
+
     const statusText = form.querySelector<HTMLElement>('[data-form-status]');
     const submitBtn = form.querySelector<HTMLButtonElement>('[data-form-submit]');
 
@@ -194,7 +217,7 @@ export function setupFormHandler(form: HTMLFormElement): void {
         const now = Date.now();
         if (lastSubmit && now - parseInt(lastSubmit, 10) < COOLDOWN_TIME_MS) {
             const remaining = Math.ceil((COOLDOWN_TIME_MS - (now - parseInt(lastSubmit, 10))) / 1000);
-            statusText.textContent = `Please wait ${remaining} seconds before sending another message.`;
+            statusText.textContent = t('warning.cooldown', { seconds: remaining });
             statusText.className = 'form-status error';
             return;
         }
@@ -203,10 +226,10 @@ export function setupFormHandler(form: HTMLFormElement): void {
 
         form.setAttribute('aria-busy', 'true');
         submitBtn.disabled = true;
-        const originalBtnText = submitBtn.textContent || 'Send Message';
-        submitBtn.textContent = 'Sending...';
+        const originalBtnText = submitBtn.textContent || t('contact.send_message');
+        submitBtn.textContent = t('contact.sending');
 
-        statusText.textContent = 'Processing message...';
+        statusText.textContent = t('contact.processing');
         statusText.className = 'form-status info';
 
         // 3. Payload Cleanup & Trimming
@@ -227,7 +250,7 @@ export function setupFormHandler(form: HTMLFormElement): void {
 
         if (checkedRadio && subjectInput && nameInput) {
             const config = JSON.parse(checkedRadio.dataset.reasonConfig || '{}');
-            const userName = nameInput.value.trim() || 'Usuario';
+            const userName = nameInput.value.trim() || t('contact.fallbackName');
 
             if (config.extraField === 'company' && companyInput) {
                 // Genera: "[Laboral] Nuevo mensaje de Juan Pérez (Tech Corp)"
@@ -250,7 +273,7 @@ export function setupFormHandler(form: HTMLFormElement): void {
             const result: Web3FormsResponse = await response.json();
 
             if (response.ok && result.success) {
-                statusText.textContent = 'Message sent successfully!';
+                statusText.textContent = t('modal.success.title');
                 statusText.className = 'form-status success';
                 localStorage.setItem('last_form_submit', Date.now().toString());
                 form.reset();
@@ -266,23 +289,23 @@ export function setupFormHandler(form: HTMLFormElement): void {
 
                 // En el envío exitoso del formulario:
                 showModal({
-                    title: 'Message sent successfully!',
-                    message: 'Thanks for contacting me. I will respond to you as soon as possible.',
+                    title: t('modal.success.title'),
+                    message: t('modal.success.description'),
                     type: 'success'
                 });
             } else {
-                statusText.textContent = result.message || 'An error occurred while sending.';
+                statusText.textContent = result.message || t('error.generic');
                 statusText.className = 'form-status error';
 
                 // En el envío exitoso del formulario:
                 showModal({
-                    title: 'Something went wrong!',
-                    message: 'Sorry, there was an error sending your message. Please try again later.',
+                    title: t('modal.error.title'),
+                    message: t('modal.error.description'),
                     type: 'error'
                 });
             }
         } catch (error) {
-            statusText.textContent = 'Connection error. Please try again.';
+            statusText.textContent = t('error.connection');
             statusText.className = 'form-status error';
         } finally {
             form.setAttribute('aria-busy', 'false');
