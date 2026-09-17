@@ -4,6 +4,13 @@ import { Image } from 'astro:assets';
 import profileImage from '../assets/images/Foto_CV-sin_fondo.webp';
 import ActionElement from './ui/ActionElement.astro';
 import { Icon } from 'astro-icon/components';
+
+import { useTranslations } from '../i18n/utils';
+const t = useTranslations(Astro.currentLocale);
+
+import { getSafeLang } from '../i18n/utils';
+const lang = getSafeLang(Astro.currentLocale);
+const cvUrl = `${import.meta.env.BASE_URL}documents/cv/${lang}/Gregory_Salazar-CV.pdf`;
 ---
 
 <section id="home" class="hero">
@@ -19,22 +26,21 @@ import { Icon } from 'astro-icon/components';
 
     <div class="hero-content fade-in" style="transition-delay: 0.1s;">
         <div class="kicker-group">
-            <span class="kicker">Hi, I'm</span>
+            <span class="kicker">{t('hero.kicker')}</span>
             <h1 class="headline">Gregory Salazar</h1>
         </div>
 
         <div class="roles">
-            <span>Software Engineering Student</span>
-            <span>Full Stack Developer</span>
+            <span>{t('hero.roles.student')}</span>
+            <span>{t('hero.roles.developer')}</span>
         </div>
 
         <p class="description">
-            4+ years developing collaborative projects. Specialized in full stack development,
-            databases, and computer vision AI. Located in Quito, Ecuador.
+            {t('hero.description')}
         </p>
 
         <div class="actions">
-            <ActionElement variant="primary" iconPosition="left" text="Download CV" href={`${import.meta.env.BASE_URL}documents/Gregory_Salazar-CV.pdf`}>
+            <ActionElement variant="primary" iconPosition="left" text={t('action.downloadCv')} href={cvUrl}>
                 <Icon slot="icon" name="mdi:download" />
             </ActionElement>
             <div class="external-links">
