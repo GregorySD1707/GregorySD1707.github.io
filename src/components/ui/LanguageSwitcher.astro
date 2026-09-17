@@ -1,0 +1,28 @@
+---
+// src/components/ui/LanguageSwitcher.astro
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { languages, type Lang } from '../../i18n/ui';
+import { getSafeLang } from '../../i18n/utils';
+
+const currentLang = getSafeLang(Astro.currentLocale);
+const pathWithoutLocale = Astro.url.pathname.replace(new RegExp(`^/${currentLang}/?`), '/');
+
+const options = (Object.keys(languages) as Lang[]).map((lang) => ({
+  lang,
+  href: getRelativeLocaleUrl(lang, pathWithoutLocale),
+  isCurrent: lang === currentLang,
+}));
+---
+<div class="lang-switcher" role="group" aria-label="Language selector">
+    {options.map(({ lang, href, isCurrent }) => (
+    <a
+      href={href}
+      class="lang-option"
+      aria-current={isCurrent ? 'true' : undefined}
+      hreflang={lang}
+      lang={lang}
+    >
+      {lang.toUpperCase()}
+    </a>
+  ))}
+</div>

@@ -2,7 +2,7 @@
 // src/components/Header.astro
 import { useTranslations, getSafeLang } from '../i18n/utils';
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import LanguageSwitcher from '../components/ui/LanguageSwitcher.astro';
 
 const t = useTranslations(Astro.currentLocale);
 const homeHref = getRelativeLocaleUrl(getSafeLang(Astro.currentLocale), '/');
