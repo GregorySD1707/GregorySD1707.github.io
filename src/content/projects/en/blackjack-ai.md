@@ -6,7 +6,7 @@ role: "AI and Backend Developer"
 location: "Quito - Ecuador"
 duration: "April 2025 – July 2025"
 github: "https://github.com/FernandoHuilca/BlackJack_IA"
-image: "../../assets/images/projects/blackjack-ai.webp"
+image: "../../../assets/images/projects/blackjack-ai.webp"
 ---
 
 - Increased detection **accuracy by 60% (from 55% to 88%)** implementing a computer vision pipeline with YOLOv8 deep learning model, PyTorch framework, and NumPy array processing, achieving competitive real-time detection metrics.

@@ -7,7 +7,7 @@ location: "Quito - Ecuador"
 duration: "June 2026 – July 2026"
 github: "https://github.com/FernandoHuilca/Usabilidad_Accesibilidad_ProyectoFinal"
 demo: "https://fernandohuilca.github.io/Usabilidad_Accesibilidad_ProyectoFinal/"
-image: "../../assets/images/projects/bibiotec2.webp"
+image: "../../../assets/images/projects/bibiotec2.webp"
 ---
 
 - Built Book Detail page using HTML5, CSS, JavaScript, Node.js, NPM, and Tailwind CSS v4, achieving **WCAG 2.2 AA conformance** with **0 accessibility errors** detected by WAVE and verified through manual testing.

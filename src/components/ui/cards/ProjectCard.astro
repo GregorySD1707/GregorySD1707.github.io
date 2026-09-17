@@ -4,6 +4,9 @@ import type { ImageMetadata } from 'astro';
 import ActionElement from '../ActionElement.astro';
 import { Icon } from 'astro-icon/components';
 
+import { useTranslations } from '../../../i18n/utils';
+const t = useTranslations(Astro.currentLocale);
+
 type Props = {
   title: string;
   description?: string;
@@ -85,7 +88,7 @@ const {
 
                 <!-- Botones en una sola fila -->
                 <div class="card-actions row-layout">
-                    <ActionElement variant="ghost" iconPosition="left" customClass="flip-btn" text="Achivements">
+                    <ActionElement variant="ghost" iconPosition="left" customClass="flip-btn" text={t('actions.achievements')}>
                         <Icon slot="icon" name="mdi:achievement" />
                     </ActionElement>
                 
@@ -109,7 +112,7 @@ const {
         <!-- ================= CARA TRASERA ================= -->
         <div class="card-face card-back">
             <div class="back-header">
-                <h4>Achievements</h4>
+                <h4>{t('actions.achievements')}</h4>
                 <span class="back-title">{title}</span>
             </div>
             
@@ -118,7 +121,7 @@ const {
             </div>
 
             <div class="back-footer">
-                <ActionElement variant="ghost" iconPosition="left" customClass="flip-back-btn" text="Back">
+                <ActionElement variant="ghost" iconPosition="left" customClass="flip-back-btn" text={t('actions.back')}>
                     <Icon slot="icon" name="mdi:arrow-left" />
                 </ActionElement>
             </div>

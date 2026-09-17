@@ -6,7 +6,7 @@ role: "UX-UI Figma Designer"
 location: "Quito - Ecuador"
 duration: "May 2026 – July 2026"
 demo: "https://www.figma.com/proto/pYPoQyhypgpKw3FDlSEQX0/Prototipado?node-id=529-3482&t=khsnxUxsWfVxbmTc-1&scaling=min-zoom&content-scaling=fixed&page-id=37%3A59&starting-point-node-id=529%3A3482&show-proto-sidebar=1"
-image: "../../assets/images/projects/elderly-care1.webp"
+image: "../../../assets/images/projects/elderly-care1.webp"
 ---
 
 - Identified the caregiver, not the patient, as the real end-user through contextual observation and workshops with older adults and caregivers at a Quito geriatric center, redefining the design direction.

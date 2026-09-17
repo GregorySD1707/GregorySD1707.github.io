@@ -28,6 +28,8 @@ export const ui = {
     // Botones de acción
     'actions.view': 'View',
     'actions.download': 'Download',
+    'actions.achievements': 'Achievements',
+    'actions.back': 'Back',
   },
   es: {
     // meta información
@@ -53,5 +55,7 @@ export const ui = {
     // Botones de acción
     'actions.view': 'Ver',
     'actions.download': 'Descargar',
+    'actions.achievements': 'Logros',
+    'actions.back': 'Volver',
   },
 } as const;

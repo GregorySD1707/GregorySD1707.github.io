@@ -7,7 +7,7 @@ location: "Quito - Ecuador"
 duration: "October 2025 – January 2026"
 github: "https://github.com/FernandoHuilca/web-recetario"
 demo: "https://web-recetario.onrender.com/"
-image: "../../assets/images/projects/gregorys-kitchen1.webp"
+image: "../../../assets/images/projects/gregorys-kitchen1.webp"
 ---
 
 - Generated **9 detailed use cases** with 100% stakeholder approval using UML diagrams, progressing to robustness-communication and sequence diagrams for technical design.

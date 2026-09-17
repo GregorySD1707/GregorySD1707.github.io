@@ -3,14 +3,18 @@
 import { render } from 'astro:content';
 import ProjectCard from './ui/cards/ProjectCard.astro';
 import { getCollection } from 'astro:content';
+import { useTranslations, getSafeLang } from '../i18n/utils';
+const t = useTranslations(Astro.currentLocale);
 
 // Obtener todos los proyectos desde el contenido Markdown
-const allProjects = await getCollection('projects');
-
+const lang = getSafeLang(Astro.currentLocale);
+const allProjects = await getCollection('projects', (entry) =>
+  entry.id.startsWith(`${lang}/`)
+);
 ---
 
 <section id="projects" class="fade-in">
-    <h2 class="section-title">Projects</h2>
+    <h2 class="section-title">{t('nav.projects')}</h2>
     
     <div class="carousel-wrapper">
 

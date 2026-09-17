@@ -6,7 +6,7 @@ role: "Full Stack Developer"
 location: "Quito - Ecuador"
 duration: "May 2026 – July 2026"
 github: "https://github.com/FernandoHuilca/ProyectoVyV_DigitalLibrary"
-image: "../../assets/images/projects/notable.webp"
+image: "../../../assets/images/projects/notable.webp"
 ---
 
 - Developed **2 core peer-interaction modules** using Python: Utility Voting and Commenting System, within a Django architecture and a SQLite Database to evaluate and rank student academic material.

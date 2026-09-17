@@ -7,7 +7,7 @@ location: "Quito - Ecuador"
 duration: "June 2026 – July 2026"
 github: "https://github.com/GregorySD1707/BI_Coatis_Coffee_House"
 demo: "https://bicoatiscoffeehouse-f5c5wsb8kqdrvzsru24myy.streamlit.app/"
-image: "../../assets/images/projects/coatis-coffee-house.webp"
+image: "../../../assets/images/projects/coatis-coffee-house.webp"
 ---
 
 - Solved **inventory stockout risks** using Python by engineering an automated forecasting engine combining ABC classification and Holt-Winters Exponential Smoothing (statsmodels) to **predict stock autonomy** and **trigger real-time reorder alerts**.

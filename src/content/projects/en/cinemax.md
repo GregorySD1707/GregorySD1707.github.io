@@ -6,7 +6,7 @@ role: "Full Stack Developer"
 location: "Quito - Ecuador"
 duration: "April 2025 – August 2025"
 github: "https://github.com/CineMax-Diseno-De-Software-GR3SW/CineMax"
-image: "../../assets/images/projects/cinemax.webp"
+image: "../../../assets/images/projects/cinemax.webp"
 ---
 
 - Collaboratively architected Java application applying **SOLID principles** and design patterns, managing complex relationships between Movies, Theaters, Tickets, Employees, and Reports entities.
