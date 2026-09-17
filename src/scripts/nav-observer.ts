@@ -54,3 +54,19 @@ export const initNavObserver = () => {
 
   sections.forEach((section) => navObserver.observe(section));
 };
+
+export function initHeaderScroll(): void {
+  const header = document.querySelector('header');
+  if (!header) return;
+
+  const handleScroll = () => {
+    if (window.scrollY > 20) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll(); // Chequeo inicial
+}

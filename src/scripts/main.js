@@ -1,6 +1,6 @@
 import { initCarousel2D } from '../scripts/carousel-2d';
 import { initCarousel3D } from '../scripts/carousel-3d';
-import { initNavObserver } from '../scripts/nav-observer';
+import { initNavObserver, initHeaderScroll } from '../scripts/nav-observer';
 import { useTranslations, getSafeLang } from '../i18n/utils';
 const lang = getSafeLang(document.documentElement.lang);
 const t = useTranslations(lang);
@@ -186,7 +186,9 @@ document.addEventListener("DOMContentLoaded", () => {
   initFlipCards(); // Inicializa la funcionalidad de volteo de tarjetas
   initSkillsSpotlight();
   initSkillsToggle();
+
   initNavObserver();
+  initHeaderScroll();
 
   // Inicialización de carruseles
   initCarousel3D(); 
