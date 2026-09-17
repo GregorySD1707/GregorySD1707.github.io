@@ -3,11 +3,20 @@ import { defineConfig } from 'astro/config';
 import icon from 'astro-icon';
 
 export default defineConfig({
-    site: 'https://gregorysd1707.github.io',
+  site: 'https://gregorysd1707.github.io',
 
   //base: '/', Comentando porque sí estamos usando es usuario.github.io
   
   output: 'static',
+
+  i18n: {
+    locales: ['en', 'es'],
+    defaultLocale: 'en',
+    routing: {
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: true,
+    },
+  },
 
   // Para usar iconos de Material Design Icons (MDI)
   integrations: [icon({
