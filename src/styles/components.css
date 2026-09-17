@@ -251,7 +251,7 @@ nav a.active::after {
 }
 
 /* ---------- Responsive Header ---------- */
-@media (max-width: 900px) {
+@media (max-width: 1023px) {
     header {
         flex-direction: column; /* Apila el logo y la navegación */
         gap: var(--space-16);
