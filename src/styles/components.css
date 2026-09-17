@@ -404,3 +404,25 @@ nav a.active::after {
     .nav-link-icon { display: inline-flex; }
     
 }
+
+/* ---------- Konami Easter Egg ---------- */
+.konami-easter-egg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    pointer-events: none;
+    /* Translate is needed in both keyframes to keep it perfectly centered while spinning */
+    animation: konami-spin 3s linear infinite;
+    max-width: 1000px;
+    height: auto;
+}
+
+@keyframes konami-spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}

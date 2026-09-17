@@ -54,6 +54,7 @@ const { title = t('meta.title') } = Astro.props;
         <link rel="alternate" hreflang={altLang} href={getAbsoluteLocaleUrl(altLang, currentPath)} />
     ))}
     <link rel="alternate" hreflang="x-default" href={getAbsoluteLocaleUrl('en', currentPath)} />
+    <link rel="icon" type="image/svg+xml" href="/images/icon.svg" />
 </head>
 <body>
     <!-- Header compartido -->
