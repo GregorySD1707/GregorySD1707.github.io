@@ -35,10 +35,53 @@ const alternateLocales = (Object.keys(languages) as Lang[]);
 
 export interface Props {
   title?: string;
+  description?: string;
+  image?: string;
 }
 
-const { title = t('meta.title') } = Astro.props;
+const { 
+    title = t('meta.title'),
+    description = t('meta.description'),
+    image = '/og-image.png',
+ } = Astro.props;
 
+// Anchors (#events, #projects...) are client-side scroll targets, never
+// separate server routes. Astro.url already excludes them (fragments never
+// reach the server), so this is the single canonical URL per language.
+const canonicalURL = new URL(currentPath, Astro.site);
+const ogImageURL = new URL(image, Astro.site);
+
+// Structured data: this is what answer engines (Perplexity, Google AI
+// Overviews) and LLMs read to treat Gregory as a specific, citable entity
+// instead of guessing from unstructured prose.
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Gregory Salazar',
+  url: Astro.site?.toString(),
+  image: ogImageURL.toString(),
+  jobTitle: t('hero.roles.developer'),
+  description: t('meta.description'),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Quito',
+    addressCountry: 'EC',
+  },
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'Escuela Politécnica Nacional',
+  },
+  knowsAbout: [
+    'Full Stack Development',
+    'Databases',
+    'Computer Vision',
+    'Software Engineering',
+  ],
+  sameAs: [
+    'https://github.com/GregorySD1707',
+    'https://www.linkedin.com/in/gsalazar17/',
+  ],
+};
 ---
 
 <!DOCTYPE html>
@@ -47,6 +90,8 @@ const { title = t('meta.title') } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL.toString()} />
 
     <!-- para que buscadores sepan que /en/ y /es/ son la misma página en distintos idiomas.
      Sin esto, Google puede indexarlas como contenido duplicado. -->
@@ -54,7 +99,24 @@ const { title = t('meta.title') } = Astro.props;
         <link rel="alternate" hreflang={altLang} href={getAbsoluteLocaleUrl(altLang, currentPath)} />
     ))}
     <link rel="alternate" hreflang="x-default" href={getAbsoluteLocaleUrl('en', currentPath)} />
+    
     <link rel="icon" type="image/svg+xml" href="/images/icon.svg" />
+
+     <!-- Open Graph: leído por Facebook, LinkedIn, WhatsApp, Discord, y la mayoría de crawlers de IA -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content={lang === 'es' ? 'es_EC' : 'en_US'} />
+
+    <!-- Twitter/X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 </head>
 <body>
     <!-- Header compartido -->

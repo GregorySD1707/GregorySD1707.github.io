@@ -1,6 +1,7 @@
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import icon from 'astro-icon';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://gregorysd1707.github.io',
@@ -28,5 +29,14 @@ export default defineConfig({
           'briefcase', 'school', 'eye', 'check', 'close', 'alert','information',
           'menu', 'home'],
       },
-    }),],
+    }),
+
+    // Para generar un sitemap.xml con soporte para i18n
+    sitemap({
+      i18n: {
+        locales: { en: 'en', es: 'es' },
+        defaultLocale: 'en',
+      },
+    }),
+  ],
 });

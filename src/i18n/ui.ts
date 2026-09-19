@@ -5,7 +5,8 @@ export type Lang = keyof typeof languages;
 
 const en = {
     // meta información
-    'meta.title': 'Gregory Salazar | Portfolio',
+    'meta.title': 'Gregory Salazar | Junior Full Stack Developer | Software Engineer',
+    'meta.description': 'Gregory Salazar - Full Stack Developer & Software Engineering student in Quito, Ecuador. 4+ years building web apps, databases, and AI projects.',
 
     // Barra de navegación y títulos de secciones
     'home.name': 'Home',
@@ -22,7 +23,7 @@ const en = {
     'hero.kicker': "Hi, I'm",
     'hero.roles.student': 'Software Engineering Student',
     'hero.roles.developer': 'Junior Full Stack Developer',
-    'hero.description': '4+ years developing collaborative projects. Specialized in full stack development, databases, and computer vision AI. Located in Quito, Ecuador.',
+    'hero.description': '4+ years of experience in collaborative projects. Specialized in full stack development, databases, and computer vision AI. Located in Quito, Ecuador.',
     'action.downloadCv': 'Download CV',
 
     // Sección Skills
@@ -90,7 +91,8 @@ export type TranslationKey = keyof typeof en;
 // #################################################### TRADUCCIONES AL ESPAÑOL ###################################################################################
 const es: Record<TranslationKey, string> = {
     // meta información
-    'meta.title': 'Gregory Salazar | Portafolio',
+    'meta.title': 'Gregory Salazar | Desarrollador Junior Full Stack | Ingeniero de Software',
+    'meta.description': 'Gregory Salazar, desarrollador Full Stack e Ingeniero de Software en Quito, Ecuador. Apps web, bases de datos y proyectos de IA',
 
     // Barra de navegación y títulos de secciones
     'home.name': 'Inicio',
@@ -107,7 +109,7 @@ const es: Record<TranslationKey, string> = {
     'hero.kicker': 'Hola, soy',
     'hero.roles.student': 'Estudiante de Ingeniería de Software',
     'hero.roles.developer': 'Desarrollador Junior Full Stack',
-    'hero.description': 'Más de 4 años desarrollando proyectos colaborativos. Especializado en desarrollo full stack, Bases de Datos e IA de visión por computadora. Ubicado en Quito, Ecuador.',
+    'hero.description': 'Más de 4 años de experiencia en proyectos colaborativos. Especializado en desarrollo full stack, Bases de Datos e IA de visión por computadora. Ubicado en Quito, Ecuador.',
     'action.downloadCv': 'Descargar CV',
 
     // Sección Skills

@@ -12,6 +12,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "@iconify-json/logos": "^1.2.13",
     "@iconify-json/mdi": "^1.2.3",
     "astro": "^7.1.6",
