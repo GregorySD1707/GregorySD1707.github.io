@@ -8,14 +8,14 @@ const t = useTranslations(Astro.currentLocale);
 const homeHref = getRelativeLocaleUrl(getSafeLang(Astro.currentLocale), '/');
 
 const navItems = [
-  { href: '#home', labelKey: 'home.name', icon: 'mdi:home' },
-  { href: '#experience', labelKey: 'experience.name', icon: 'mdi:briefcase' },
-  { href: '#projects', labelKey: 'projects.name', icon: 'mdi:folder' },
-  { href: '#education', labelKey: 'education.name', icon: 'mdi:school' },
-  { href: '#certificates', labelKey: 'certificates.name', icon: 'mdi:achievement' },
-  { href: '#events', labelKey: 'events.name', icon: 'mdi:calendar' },
-  { href: '#skills', labelKey: 'skills.name', icon: 'mdi:head-lightbulb' },
-  { href: '#contact', labelKey: 'contact.name', icon: 'mdi:chat-processing' },
+    { href: '#home', labelKey: 'home.name', icon: 'mdi:home' },
+    { href: '#experience', labelKey: 'experience.name', icon: 'mdi:briefcase' },
+    { href: '#skills', labelKey: 'skills.name', icon: 'mdi:head-lightbulb' },
+    { href: '#projects', labelKey: 'projects.name', icon: 'mdi:folder' },
+    { href: '#certificates', labelKey: 'certificates.name', icon: 'mdi:achievement' },
+    { href: '#education', labelKey: 'education.name', icon: 'mdi:school' },
+    { href: '#events', labelKey: 'events.name', icon: 'mdi:calendar' },
+    { href: '#contact', labelKey: 'contact.name', icon: 'mdi:chat-processing' },
 ] as const;
 ---
 <header class="fade-in">
